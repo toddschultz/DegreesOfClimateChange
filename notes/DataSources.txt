@@ -1,0 +1,44 @@
+NOAA
+https://www.ncdc.noaa.gov/data-access
+https://www.ncdc.noaa.gov/cdo-web/webservices/v2
+
+NOAA has solar radiation data too
+NREL SMARTS program for model of solar irradiances
+
+US Energy Information Administration
+https://www.eia.gov/opendata/
+
+https://www.fueleconomy.gov/feg/ws/index.shtml
+
+Department of Energy
+C02 data is available 
+https://www.energy.gov/data/downloads/open-data-catalogue
+
+NASA
+https://earthdata.nasa.gov/earth-observation-data
+
+World Bank
+www.worldbank.org
+
+Japan
+https://ds.data.jma.go.jp/tcc/tcc/products/gwp/temp/ann_wld.html
+
+United Kingdon
+
+https://www.metoffice.gov.uk/research/monitoring/climate/surface-temperature
+
+http://hadobs.metoffice.com/hadcet/
+
+https://crudata.uea.ac.uk/cru/data/temperature/
+
+
+Wikipedia entry
+May point to additional sources
+https://en.wikipedia.org/wiki/Global_temperature_record
+
+
+http://pastglobalchanges.org/ini/wg/2k-network/sci-data-2k-17
+
+
+https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table
+

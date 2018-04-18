@@ -1,0 +1,27 @@
+The main task for this project is to retrieve climate data, in particular average global temperatures, from various sources. The data are offered typically using a RESTful webservice and thus make choosing an interface layer critical to the project. 
+
+Requirements
+To meet the needs of the intended audience for the project, the following requirements are specified. 
+* OS agnostic
+* Available via FOSS license
+
+# Available Technology
+Python package to interface with RESTful APIs
+## Flask-RESTful https://pypi.python.org/pypi/Flask-RESTful
+### Pros
+### Cons
+
+## Simple REST Client https://pypi.python.org/pypi/simple-rest-client
+### Pros
+### Cons
+
+## EVE http://python-eve.org/
+### Pros
+### Cons
+
+## curl bash command
+### Pros
+* Readily availabe on Linus systems without installation
+### Cons
+* *nix specific
+* Requires calling system commands from Python

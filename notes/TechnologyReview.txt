@@ -4,9 +4,25 @@ Requirements
 To meet the needs of the intended audience for the project, the following requirements are specified. 
 * OS agnostic
 * Available via FOSS license
+* Simple commands for retrieving data
+* Allows for a token or password to be transmitted in the header
 
 # Available Technology
 Python package to interface with RESTful APIs
+## Requests http://docs.python-requests.org/en/master/
+### Pros
+* In Anaconda distribution
+* Allows for username and passwords
+### Cons
+
+## Pandas
+### Pros
+* Can read json formatted data
+* Can read straight from URL
+### Cons
+* Doesn't appear to allow metadata in the header for URL calls
+
+
 ## Flask-RESTful https://pypi.python.org/pypi/Flask-RESTful
 ### Pros
 ### Cons

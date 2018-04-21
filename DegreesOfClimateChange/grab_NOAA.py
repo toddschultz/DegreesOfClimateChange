@@ -27,9 +27,29 @@ Written by Todd Schultz
 2018
 """
 
+import requests
+
 
 def grab_temperatures_noaa():
     """Retrieves global average temperatures from NOAA."""
     
     # Read in API key
+    with open("NOAAtoken.txt") as file:
+        noaa_key = file.read()
     
+    # example work for connecting to NOAA RESTful API
+    base_url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/"
+    end_point = "datasets?"
+    
+    r = requests.get(base_url + end_point, headers={'token': noaa_key})
+    
+    
+"""
+r = requests.get('http://api.football-data.org/v1/competitions/398/teams')
+x = r.json()
+df = pd.DataFrame(x['teams'])
+print df
+
+r = requests.get('http://api.football-data.org/v1/competitions/398/teams')
+df = pd.read_json(x.text)
+"""

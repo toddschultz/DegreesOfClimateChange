@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-""" grab_temperatures_NOAA retrieves global average temperatures from NOAA.
+"""grab_noaa retrieves global average temperatures from NOAA.
 
 This python module contains a single function, grab_temperatures_NOAA, that
 retrieves the global average temperature estimets from NOAA. This is the
-climate data that is used to evaluate global climate change. 
+climate data that is used to evaluate global climate change.
 
 An overview of the data access available from NOAA is at:
 https://www.ncdc.noaa.gov/data-access
@@ -27,7 +27,8 @@ Written by Todd Schultz
 2018
 """
 
-def grab_temperatures_NOAA():
+
+def grab_temperatures_noaa():
     """Retrieves global average temperatures from NOAA."""
     
     # Read in API key

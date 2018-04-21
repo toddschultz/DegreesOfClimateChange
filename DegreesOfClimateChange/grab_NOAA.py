@@ -39,7 +39,7 @@ def grab_temperatures_noaa():
     
     # example work for connecting to NOAA RESTful API
     base_url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/"
-    end_point = "datasets?"
+    end_point = "datasets"
     
     r = requests.get(base_url + end_point, headers={'token': noaa_key})
     

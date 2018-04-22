@@ -27,6 +27,7 @@ Written by Todd Schultz
 2018
 """
 
+import pandas as pd
 import requests
 
 
@@ -39,10 +40,19 @@ def grab_temperatures_noaa():
     
     # example work for connecting to NOAA RESTful API
     base_url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/"
-    end_point = "datasets"
+    end_point = "datasets?"
+    options = "limit=1000"
     
-    r = requests.get(base_url + end_point, headers={'token': noaa_key})
+    r = requests.get(base_url + end_point + options, headers={'token': noaa_key})
     
+    """
+    "uid":"gov.noaa.ncdc:C00946",
+    "mindate":"1763-01-01",
+    "maxdate":"2018-03-01",
+    "name":"Global Summary of the Month",
+    "datacoverage":1,
+    "id":"GSOM"
+    """
     
 """
 r = requests.get('http://api.football-data.org/v1/competitions/398/teams')

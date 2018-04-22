@@ -13,6 +13,7 @@ Python package to interface with RESTful APIs
 ### Pros
 * In Anaconda distribution
 * Allows for username and passwords
+* Designed for simple data retrieval
 ### Cons
 
 ## Pandas
@@ -26,14 +27,17 @@ Python package to interface with RESTful APIs
 ## Flask-RESTful https://pypi.python.org/pypi/Flask-RESTful
 ### Pros
 ### Cons
+* Complex module designed as a full web development framework
 
 ## Simple REST Client https://pypi.python.org/pypi/simple-rest-client
 ### Pros
 ### Cons
+* Not included in the Anaconda distribution
 
 ## EVE http://python-eve.org/
 ### Pros
 ### Cons
+* Not included in the Anaconda distribution
 
 ## curl bash command
 ### Pros

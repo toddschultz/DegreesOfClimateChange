@@ -27,6 +27,7 @@ Written by Todd Schultz
 2018
 """
 
+import datetime
 import pandas as pd
 import requests
 
@@ -69,6 +70,18 @@ def grab_temperatures_noaa():
      noaa_global_ts = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/1/1880-2018.csv"
      df = pd.read_cvs(noaa_global_ts)
     """
+    # NOAA Global average temperature time series
+    base_url = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/"
+    end_url = "/1880-" + str(datetime.datetime.now().year) + ".csv"
+    
+    month = str(1)
+    
+    noaa_url = base_url + month + end_url
+    
+    data_df = pd.read_csv(noaa_url, skiprows=[0,1,2,3])
+    
+    data_df = data_df[4:]
+    df.drop(df.index[[2,3]])
     
 """
 r = requests.get('http://api.football-data.org/v1/competitions/398/teams')

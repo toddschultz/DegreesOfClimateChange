@@ -40,8 +40,10 @@ def grab_temperatures_noaa():
     
     # example work for connecting to NOAA RESTful API
     base_url = "https://www.ncdc.noaa.gov/cdo-web/api/v2/"
-    end_point = "datasets?"
-    options = "limit=1000"
+    end_point = "data?"
+    #end_point = "datasets?"
+    #options = "limit=1000"
+    options = "datasetid=GHCND&startdate=2017-04-01&enddate=2018-03-01&limit=1000"
     
     r = requests.get(base_url + end_point + options, headers={'token': noaa_key})
     
@@ -52,6 +54,20 @@ def grab_temperatures_noaa():
     "name":"Global Summary of the Month",
     "datacoverage":1,
     "id":"GSOM"
+    
+     Global Historical Climatology Network-Monthly (GHCN-M) data set
+     
+     "uid":"gov.noaa.ncdc:C00861",
+     "mindate":"1763-01-01",
+     "maxdate":"2018-04-20",
+     "name":"Daily Summaries",
+     "datacoverage":1,
+     "id":"GHCND"
+     
+     NOAA 
+     Global Time Series
+     noaa_global_ts = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/1/1880-2018.csv"
+     df = pd.read_cvs(noaa_global_ts)
     """
     
 """

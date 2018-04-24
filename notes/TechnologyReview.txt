@@ -16,7 +16,7 @@ Python package to interface with RESTful APIs
 * Designed for simple data retrieval
 ### Cons
 
-## Pandas
+## Pandas (pandas.read_csv)
 ### Pros
 * Can read json formatted data
 * Can read straight from URL

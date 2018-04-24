@@ -1,4 +1,11 @@
 NOAA
+The average global temperature data seems to stored in an simple url interface at
+https://www.ncdc.noaa.gov/cag/
+
+But only one month of the year can be accessed at a time but for the entire record from 1880 to present. The full url  is 
+https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/1/1880-2017.csv
+
+The RESTful APIs don't seem to have the historic climate data including the global average temperature estimates. 
 https://www.ncdc.noaa.gov/data-access
 https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 

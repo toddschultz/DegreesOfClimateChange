@@ -73,12 +73,13 @@ def grab_temperatures_noaa():
     # NOAA Global average temperature time series
     base_url = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/"
     end_url = "/1880-" + str(datetime.datetime.now().year) + ".csv"
+    header_skip = [0, 1, 2, 3]
     
     month = str(1)
     
     noaa_url = base_url + month + end_url
     
-    data_df = pd.read_csv(noaa_url, skiprows=[0,1,2,3])
+    data_df = pd.read_csv(noaa_url, skiprows=header_skip)
     
     data_df = data_df[4:]
     df.drop(df.index[[2,3]])

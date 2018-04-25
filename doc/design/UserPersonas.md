@@ -2,7 +2,7 @@
 
 This file documents user pesonas that were considered for this project. 
 
-# User persona 1 - Sally the scientist
+## User persona 1 - Sally the scientist
 
 Description
 Many governments and organizations provide estimates of the average global temperatures, but who watches over them? Citizen scientists and analytists routinely attempt to reproduce and verify the results and have the technical training and education to understand and even improve climate estimates. However, many don't have computer training and time to collect and corrolate data provided by the sources by various and uniquely different means and interfaces. Given proper tools to ease the data access task Sally can keep tabs on the watchers.

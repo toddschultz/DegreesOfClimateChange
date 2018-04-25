@@ -1,2 +1,0 @@
-email,token
-jane.smith@boeing.com,klsID48KLDLkadoieJ943kkladfjSAlo

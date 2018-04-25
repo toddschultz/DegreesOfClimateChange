@@ -1,5 +1,5 @@
 Use cases by question
-What is success?
+
 
 What is the average global temperature from a certain agency?
 

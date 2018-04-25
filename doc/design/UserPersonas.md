@@ -1,14 +1,17 @@
-User persona
-Name – Sally the scientist
+# User persona
+
+This file documents user pesonas that were considered for this project. 
+
+# User persona 1 - Sally the scientist
 
 Description
-Many governments and organizations provide estimates of the average global temperatures, but who watches over them? Citizen scientists and analytists routinely attempt to reproduce and verify the results and have the technical training and education to understand and even improve climate estimates. However, many don't have computer training and time to collect and corrolate data provided by the sources by various and uniquely different means and interfaces. Given proper tools to ease the data access task the citizen scientists/analytists can keep tabs on the watchers.
+Many governments and organizations provide estimates of the average global temperatures, but who watches over them? Citizen scientists and analytists routinely attempt to reproduce and verify the results and have the technical training and education to understand and even improve climate estimates. However, many don't have computer training and time to collect and corrolate data provided by the sources by various and uniquely different means and interfaces. Given proper tools to ease the data access task Sally can keep tabs on the watchers.
 
 Actors
-Citizen scientisits and analytists are people who are educated in science, technical, engineering, or mathematics and capable sophicated technical analyzes.
+Sally the scientist are people who are educated in science, technical, engineering, or mathematics and capable sophicated technical analyzes.
 
 Assumptions
-The citizen scientists are assume to be proficient with basic computer tasks and computational tools. However, no pacticular operatoring system, analysis tool, or programming language can be assumed. 
+The Sally the scientist is assumed to be proficient with basic computer tasks and computational tools. However, no pacticular operatoring system, analysis tool, or programming language can be assumed. 
 
 Success criteria
 * Open a self-documenting notebook type file

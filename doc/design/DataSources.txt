@@ -18,8 +18,16 @@ https://www.eia.gov/opendata/
 https://www.fueleconomy.gov/feg/ws/index.shtml
 
 Department of Energy
+DoE doesn't appear to have a dataset for the average global temperature, but would be the place for CO2 data, split between transportation and building. Also, looks like all the DoE data is on data.gov now. 
+
 C02 data is available 
 https://www.energy.gov/data/downloads/open-data-catalogue
+
+https://catalog.data.gov/organization/doe-gov
+
+looks like transfered to 
+
+https://data.gov
 
 NASA
 https://earthdata.nasa.gov/earth-observation-data

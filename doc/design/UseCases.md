@@ -39,7 +39,7 @@ Graph readily available in an interactive forum with all available data and for 
 Line graph available in the final notebook product that has a line for each data source/agency. The x-axis should be the time axis presented with the full time scale available from all the data sources. The y-axis should be the average global temperature with units of degrees Celsius. Controls for zooming and panning should be accessible. 
 
 
-### Question 4
+### Question 3
 How do I add another agency’s estimate?
 
 Sally, being a scientist, will likely want to add additional data sources and agency estimates to expand and improve the analysis. The data sources already provided in the notebook should provide examples of how to build functions to retrieve, process, and organize the data from various agencies. Sally would also like simple, well-written instructions to help guide her through process of contructing the data access functions and integrating the new data set into the exiting notebook and graph. 
@@ -53,8 +53,15 @@ A new data access function similar to the existing ones and a new line on the co
 #### Design
 Provide a read me file with plain english language instructions for creating a new data access function from a new data source. The instructions should be complete but concise and visually appealing such as in a list format. The existing data access functions should be well-documented to explain all the steps performed and why. They will serve as a set of examples for the construction of new functions. 
 
-### Question 3
+### Question 4
 What other quantities correlate to the average global temperature?
 
-### Question 5
-How do I add another quantity?
+Sally the scientist will likely create additional questions from her investigation of the global temperature data. She will likely want to additional quantities to the analysis to try to better understand the cause of any temperature tends discovered. She will likely want to add in quantities suchs as CO2 emissions and solar radation as to look for correlation. Thus, Sally will like to be able to add a new section to the notebook where she can import additional data variables, create new plots, and perform statistical correlation analysis. 
+
+#### Inputs
+Imports new data variables from additional data sources
+
+#### Outputs
+Additional variables in the notebook
+Creatation of new graphs to display the new data and correlaton results
+

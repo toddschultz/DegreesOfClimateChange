@@ -56,10 +56,15 @@ Python package to interface with RESTful APIs
 ### Pros
 * Single method calls to do the equivalent of multiple API requests, makes for much more readable and repeatable code
 * Supports both ISO 1366 alpha-2 and alpha-3 country codes. Most standard API wrapper libraries only support alpha-3 ISO codes. i.e. wbpy supports 'legacy format' regarding the ISO-3166 standard (https://www.iso.org/iso/home/standards/country_codes.htm)
-* Defines multiple subclasses i.e. GetClimateAPI(), GetModelAPI() each interfacing with the respective indicator dataset in the World Bank dataset (indicator list: https://data.worldbank.org/indicator)
+* Defines multiple .get(foo) functions, where foo is a query on a/many indicator(s) from the World Bank dataset (indicator list: https://data.worldbank.org/indicator). I.e. simply can do:
+* ```python
+     population_indicators = api.get_indicators(search="population")
+     ```
+### Cons
+* Not included in the Anaconda distribution
 
 # Visualization Technology
-The project also needs to be able to generate a plot of the estimated average global temperatures from the various angencies. The requirements and user personas are assuming that the intended user has only basic computer programming experience and thus would favor simplier solutions. However, the plot must be able to be zoomed and panned and easily expendable to additional new data sources. 
+The project also needs to be able to generate a plot of the estimated average global temperatures from the various angencies. The requirements and user personas are assuming that the intended user has only basic computer programming experience and thus would favor simplier solutions. However, the plot must be able to be zoomed and panned and easily expendable to additional new data sources.
 
 ## Matplotlib
 

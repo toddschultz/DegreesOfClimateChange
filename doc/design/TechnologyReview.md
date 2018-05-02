@@ -52,7 +52,7 @@ Python package to interface with RESTful APIs
 * Requires calling system commands from Python
 
 
-## wbpy
+## wbpy https://pypi.org/project/wbpy/
 ### Pros
 * Single method calls to do the equivalent of multiple API requests, makes for much more readable and repeatable code
 * Supports both ISO 1366 alpha-2 and alpha-3 country codes. Most standard API wrapper libraries only support alpha-3 ISO codes. i.e. wbpy supports 'legacy format' regarding the ISO-3166 standard (https://www.iso.org/iso/home/standards/country_codes.htm)
@@ -60,6 +60,7 @@ Python package to interface with RESTful APIs
 * ```python
      population_indicators = api.get_indicators(search="population")
      ```
+* Automatically fills in missing dates within a queried time interval (if necessary)
 ### Cons
 * Not included in the Anaconda distribution
 

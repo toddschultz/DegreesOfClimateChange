@@ -48,7 +48,7 @@ Python package to interface with RESTful APIs
 ### Pros
 * Readily availabe on Linus systems without installation
 ### Cons
-* nix specific
+* *nix specific
 * Requires calling system commands from Python
 
 

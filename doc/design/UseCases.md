@@ -17,7 +17,7 @@ Table of estimated averaged global temperatures with the corresponding date
 #### Design
 Set of Python functions with the following signature
 
-dataframe = grab_<agency>()
+dataframe = grab_agency()
 
 #### Example
 

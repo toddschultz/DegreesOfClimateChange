@@ -10,9 +10,9 @@ def grab_worldbank(select_countries=None, start_date = None, end_date = None):
     """
     ################ FIX THIS DOCSTRING #####################
     Note: NEED to install wbpy <------- **
-    - wbpy: https://github.com/mattduck/wbpy. 
-        * _not an official Python library for the world bank, but is well documented/used, and handles all the intricacies of interfacing with the World Bank RESTFUL API. 
-        * Our project will appropriately unittest any and all functions incorporating the wbpy library. 
+    - wbpy: https://github.com/mattduck/wbpy.
+        * _not an official Python library for the world bank, but is well documented/used, and handles all the intricacies of interfacing with the World Bank RESTFUL API.
+        * Our project will appropriately unittest any and all functions incorporating the wbpy library.
 
     Arguments:
         select_countries (list): List of countries from which to obtain temperature data.
@@ -128,4 +128,4 @@ def test_output_grab_worldbank():
     print("------------------------------------------------------------")
 
 if __name__ == '__main__':
-    #test_output_grab_worldbank()
+    test_output_grab_worldbank()

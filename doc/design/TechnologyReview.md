@@ -1,3 +1,4 @@
+# Web Service Data Access Technology
 The main task for this project is to retrieve climate data, in particular average global temperatures, from various sources. The data are offered typically using a RESTful webservice and thus make choosing an interface layer critical to the project. 
 
 Requirements
@@ -45,3 +46,11 @@ Python package to interface with RESTful APIs
 ### Cons
 * *nix specific
 * Requires calling system commands from Python
+
+# Visualization Technology
+The project also needs to be able to generate a plot of the estimated average global temperatures from the various angencies. The requirements and user personas are assuming that the intended user has only basic computer programming experience and thus would favor simplier solutions. However, the plot must be able to be zoomed and panned and easily expendable to additional new data sources. 
+
+## Matplotlib
+
+
+## ?

@@ -59,9 +59,9 @@ What other quantities correlate to the average global temperature?
 Sally the scientist will likely create additional questions from her investigation of the global temperature data. She will likely want to additional quantities to the analysis to try to better understand the cause of any temperature tends discovered. She will likely want to add in quantities suchs as CO2 emissions and solar radation as to look for correlation. Thus, Sally will like to be able to add a new section to the notebook where she can import additional data variables, create new plots, and perform statistical correlation analysis. 
 
 #### Inputs
-Imports new data variables from additional data sources
+Imports new data variables from additional data sources.
 
 #### Outputs
-Additional variables in the notebook
-Creatation of new graphs to display the new data and correlaton results
+* Additional variables in the notebook
+* Creatation of new graphs to display the new data and correlaton results
 

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 The main task for this project is to retrieve climate data, in particular average global temperatures, from various sources. The data are offered typically using a RESTful webservice and thus make choosing an interface layer critical to the project.
+=======
+# Web Service Data Access Technology
+The main task for this project is to retrieve climate data, in particular average global temperatures, from various sources. The data are offered typically using a RESTful webservice and thus make choosing an interface layer critical to the project.
+>>>>>>> e5b02eb10e1838f039ac7865ac92adf8f19bc6b5
 
 Requirements
 To meet the needs of the intended audience for the project, the following requirements are specified.

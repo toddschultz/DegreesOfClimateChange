@@ -41,34 +41,24 @@ def grab_temperatures_noaa():
     base_url = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/"
     end_url = "/" + str(start_year) + "-" + str(this_year) + ".csv"
     header_skip = [0, 1, 2, 3]
-    df_noaa = pd.DataFrame( columns=['Year', 'Value', 'Month'] )
+    df_noaa = pd.DataFrame(columns=['Year', 'Value', 'Month'])
     
     for imonth in range(1, 13):
         month = str(imonth)
         noaa_url = base_url + month + end_url
         data_df = pd.read_csv(noaa_url, skiprows=header_skip)
-        data_df["Month"] = month
-        
+        data_df["Month"] = imonth
         df_noaa = df_noaa.append(data_df)
         
     # check length of dataframe
     assert (df_noaa.shape[0] >= (this_year - start_year)*12), \
            "Error retrieving data, not enough rows"
     
+    # clean up dataframe
+    df_noaa = df_noaa.sort_values(["Year","Month"])
+    df_noaa["Date"] = df_noaa["Year"].astype("str") + "-" + df_noaa["Month"].astype("str") + "-01"
+    df_noaa["Tanomaly_C"] = df_noaa["Value"]
+    df_noaa = df_noaa.reset_index()
+    df_noaa = df_noaa.drop(columns=["Year", "Value", "Month", "index"])
     
-    
-    
-    
-    
-    data_df = data_df[4:]
-    df.drop(df.index[[2,3]])
-    
-"""
-r = requests.get('http://api.football-data.org/v1/competitions/398/teams')
-x = r.json()
-df = pd.DataFrame(x['teams'])
-print df
-
-r = requests.get('http://api.football-data.org/v1/competitions/398/teams')
-df = pd.read_json(x.text)
-"""
+    return df_noaa

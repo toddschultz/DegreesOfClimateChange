@@ -71,15 +71,29 @@ def grab_temperatures_noaa():
      df = pd.read_cvs(noaa_global_ts)
     """
     # NOAA Global average temperature time series
+    start_year = 1880
+    this_year = datetime.datetime.now().year
     base_url = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/"
-    end_url = "/1880-" + str(datetime.datetime.now().year) + ".csv"
+    end_url = "/" + str(start_year) + "-" + str(this_year) + ".csv"
     header_skip = [0, 1, 2, 3]
+    df_noaa = pd.DataFrame( columns=['Year', 'Value', 'Month'] )
     
-    month = str(1)
+    for imonth in range(1, 13):
+        month = str(imonth)
+        noaa_url = base_url + month + end_url
+        data_df = pd.read_csv(noaa_url, skiprows=header_skip)
+        data_df["Month"] = month
+        
+        df_noaa = df_noaa.append(data_df)
+        
+    # check length of dataframe
+    assert (df_noaa.shape[0] >= (this_year - start_year)*12), \
+           "Error retrieving data, not enough rows"
     
-    noaa_url = base_url + month + end_url
     
-    data_df = pd.read_csv(noaa_url, skiprows=header_skip)
+    
+    
+    
     
     data_df = data_df[4:]
     df.drop(df.index[[2,3]])

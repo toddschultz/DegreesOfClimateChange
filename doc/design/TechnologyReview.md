@@ -14,6 +14,8 @@ To meet the needs of the intended audience for the project, the following requir
 Python package to interface with RESTful APIs
 
 ## Requests http://docs.python-requests.org/en/master/
+r = requests.get(data_url, headers={'token’: api_key})
+
 ### Pros
 * In Anaconda distribution
 * Allows for username and passwords or tokens
@@ -23,6 +25,8 @@ Python package to interface with RESTful APIs
 * Better suited for JSON formated urls
 
 ## Pandas (pandas.read_csv)
+df = pandas.read_csv(data_url, skiprows=header_skip)
+
 ### Pros
 * Can read CSV or JSON formatted data
 * Can read straight from URL

@@ -76,6 +76,8 @@ df = pandas.read_csv(data_url, skiprows=header_skip)
 * Not included in the Anaconda distribution
 
 ## curl bash command
+curl "https://www.dataurlgoeshere.com"
+
 ### Pros
 * Readily availabe on Linux systems without installation
 ### Cons

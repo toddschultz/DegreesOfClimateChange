@@ -79,7 +79,7 @@ df = pandas.read_csv(data_url, skiprows=header_skip)
 curl "https://www.dataurlgoeshere.com"
 
 ### Pros
-* Readily availabe on Linux systems without installation
+* Readily available on Linux systems without installation
 ### Cons
 * *nix specific
 * Requires calling system commands from Python

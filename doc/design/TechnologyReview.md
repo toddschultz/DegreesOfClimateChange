@@ -30,6 +30,35 @@ Python package to interface with RESTful APIs
 * Option to easily skip header lines in the file
 ### Cons
 * Doesn't allow metadata in the header for URL calls
+* Web scraping for arbitrary websites where data may be stored deep inside an HTML DOM tree is not easily done nor viable (i.e. libraries designed for web-scraping such as BeautifulSoup, Requests, Selenium, would be a better choice for this artbitrary situation)
+
+
+## Example Case: Pandas vs. Selenium
+* Suppose we search webpage: http://www.fdic.gov/bank/individual/failed/banklist.html
+* Web page is already 'like' a table.
+* Pandas read_html code to parse:
+```python
+    #PANDAS
+    url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
+    dfs = pd.read_html(url)
+    dfs
+
+    #SELENIUM
+    from selenium import webdriver
+    from selenium.webdriver.common.keys import Keys
+    driver = webdriver.Firefox()
+    driver.get('http://www.fdic.gov/bank/individual/failed/banklist.html')
+    elem = driver.find_element_by_name('....insert HTML selector here....')
+```
+* So seems pandas is better, but....suppose we take an **arbitrary page**: i.e. 'www.python.org'
+* Using pandas.read_html()...unclear how to proceed
+* Using selenium: just change the driver.get() url to 'www.python.org' and now we have more *granular* access to the webpage elements
+
+## BeautifulSoup
+* A happy medium between direct web-scraping tools and the ease and simplicity of pandas
+* Can easily interface with pandas functions i.e.
+* Example: 'www.cnbc.com'...see jupyter notebook example and add to poiwerpoint 
+
 
 
 ## Flask-RESTful https://pypi.python.org/pypi/Flask-RESTful

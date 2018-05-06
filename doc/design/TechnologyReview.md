@@ -108,7 +108,8 @@ The project also needs to be able to generate a plot of the estimated average gl
 
 ## Matplotlib
 
-The Matplotlib license is based on the Python Software Foundation (PSF) license.
+Maintained by :  Anaconda
+License : based on the Python Software Foundation (PSF) license.
 
 
 
@@ -124,4 +125,7 @@ Underlined Framework  : D3(frontend), Tornado (backend)
 
 
 
-Github Star Count  : http://www.timqian.com/star-history/#bokeh/bokeh&plotly/dash&matplotlib/matplotlib
+Github Star Count 
+![GithubStarCount](/GithubStarCount.png)
+
+For update chart :  http://www.timqian.com/star-history/#bokeh/bokeh&plotly/dash&matplotlib/matplotlib

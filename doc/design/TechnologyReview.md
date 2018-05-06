@@ -108,5 +108,20 @@ The project also needs to be able to generate a plot of the estimated average gl
 
 ## Matplotlib
 
+The Matplotlib license is based on the Python Software Foundation (PSF) license.
 
-## ?
+
+
+## Dash 
+Maintained: Plotly
+License: MIT 
+Underlined Framework React + Plotly (frontend), Flask (backend)
+
+## Bokeh 
+Maintained by :  Anaconda
+License: BSD 3-Clause 
+Underlined Framework  : D3(frontend), Tornado (backend)
+
+
+
+Github Star Count  : http://www.timqian.com/star-history/#bokeh/bokeh&plotly/dash&matplotlib/matplotlib

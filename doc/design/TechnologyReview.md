@@ -108,24 +108,26 @@ The project also needs to be able to generate a plot of the estimated average gl
 
 ## Matplotlib
 
-Maintained by :  Anaconda
-License : based on the Python Software Foundation (PSF) license.
+* Maintained by :  Anaconda
+* License : based on the Python Software Foundation (PSF) license.
 
 
 
 ## Dash 
-Maintained: Plotly
-License: MIT 
-Underlined Framework React + Plotly (frontend), Flask (backend)
+* Maintained: Plotly
+* License: MIT 
+* Underlined Framework React + Plotly (frontend), Flask (backend)
 
 ## Bokeh 
-Maintained by :  Anaconda
-License: BSD 3-Clause 
-Underlined Framework  : D3(frontend), Tornado (backend)
+* Maintained by :  Anaconda
+* License: BSD 3-Clause 
+* Underlined Framework  : D3(frontend), Tornado (backend)
 
 
 
 Github Star Count 
-![GithubStarCount](/GithubStarCount.png)
+![GithubStarCount](https://github.com/toddschultz/DegreesOfClimateChange/blob/master/doc/design/GithubStarCount.png)
+
+
 
 For update chart :  http://www.timqian.com/star-history/#bokeh/bokeh&plotly/dash&matplotlib/matplotlib

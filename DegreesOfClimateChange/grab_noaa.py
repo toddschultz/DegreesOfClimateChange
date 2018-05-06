@@ -27,6 +27,12 @@ def grab_temperatures_noaa():
     None required
     Outputs
     Pandas DataFrame with 2 columns, Date and Tanomaly_C
+        Date        Tanomaly_C
+    0  1880-1-01       -0.00
+    1  1880-2-01       -0.12
+    2  1880-3-01       -0.13
+    3  1880-4-01       -0.05
+    4  1880-5-01       -0.07
     """
     
     # NOAA Global average temperature time series
@@ -56,3 +62,7 @@ def grab_temperatures_noaa():
     df_noaa = df_noaa.drop(columns=["Year", "Value", "Month", "index"])
     
     return df_noaa
+
+
+#get_data = grab_temperatures_noaa()
+#print(get_data.head())

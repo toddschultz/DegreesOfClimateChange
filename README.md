@@ -7,32 +7,44 @@ Although, ultimately all estimates of the average global temperature are based o
 
 The project has the following structure:
 
-    DegreesOfClimateChange/
-      |- README.md
-      |- DegreesOfClimateChange/
-         |- __init__.py
-         |- shablona.py
-         |- due.py
-         |- data/
-            |- ...
-         |- tests/
-            |- ...
-      |- doc/
-         |- Makefile
-         |- conf.py
-         |- sphinxext/
-            |- ...
-         |- _static/
-            |- ...
-	  |- examples
-	     |- something.ipynb
-      |- setup.py
-      |- .travis.yml
-      |- appveyor.yml
-      |- LICENSE
-      |- Makefile
-      |- ipynb/
-         |- ...
+├── DegreesOfClimateChange
+│   ├── NOAAURL.txt
+│   ├── NOAAtoken.txt
+│   ├── NOAAtokenTemplate.txt
+│   ├── __init__.py
+│   ├── country_iso_codes.csv
+│   ├── doe.json
+│   ├── grab_noaa.py
+│   ├── grab_worldbank.py
+│   ├── tests
+│   │   ├── __init__.py
+│   │   └── test_shablona.py
+│   └── version.py
+├── LICENSE
+├── Makefile
+├── README.md
+├── appveyor.yml
+├── doc
+│   └── design
+│       ├── DataSources.txt
+│       ├── GithubStarCount.png
+│       ├── Ideas.md
+│       ├── TechnologyReview.md
+│       ├── TechnologyReview.pptx
+│       ├── UseCases.md
+│       ├── UserPersonas.md
+│       ├── Web-scraping\ Comparison\ Example.ipynb
+│       └── designworkflow.md
+├── examples
+│   ├── README.txt
+│   ├── berkeleyearth.ipynb
+│   ├── co2_data_retrieval.ipynb
+│   ├── grab_WorldBank_Module.ipynb
+│   └── noaa_co2_data.ipynb
+├── requirements.txt
+└── setup.py
+
+5 directories, 31 files
 
 
 ### Module code

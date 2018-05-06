@@ -7,6 +7,7 @@ Although, ultimately all estimates of the average global temperature are based o
 
 The project has the following structure:
 
+```
 ├── DegreesOfClimateChange
 │   ├── NOAAURL.txt
 │   ├── NOAAtoken.txt
@@ -46,7 +47,7 @@ The project has the following structure:
 
 5 directories, 31 files
 
-
+```
 ### Module code
 
 Describe the modules

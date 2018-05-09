@@ -1,7 +1,7 @@
 # Component Design
 This document details the components needed for the project as identified by the other design documents such the use case document, the user persona document, and work flow document. 
 
-## Notebook
+## Jupyter Notebook
 Jupyter notebook that contains the contextual documentation describing the purpose of the notebook, the orgin of the data sources, how to access the data sources, and a visualization of all of the average global temperature estimates. The components should be exposed such that users can see the calls and even change the inputs to explore data. 
 
 ### Design
@@ -36,7 +36,7 @@ This component should create a clear and intuitive graph that compares the tempe
 graph with time (dates) on the x-axis and two y-axes, one for absolute temperature estimates and another for deviation temperature estimates
 
 ## Inputs
-dataframes with two columns (Dates,Tabsolute_C or Tanomaly_C) for each data source
+dataframes with two columns (Dates,Tabsolute_C or Tanomaly_C) for each data source (at least two)
 
 ## Outputs
 graph with one line for each data source

@@ -1,13 +1,14 @@
 """Unit test for grab_noaa.py
 
 This Python module contains multiple unit test functions to verify the
-execution of the grab_naoo.py module. Tests include verifying the number 
+execution of the grab_noaa.py module. Tests include verifying the number
 of columns, the exact column names, the data types in each column, and more.
 Excceptions thrown for all failed tests.
 
 (class) grab_noaa_UnitTests
-    Python class for unit testing the Python function 
+    Python class for unit testing the Python function
     grab_temperatures_noaa() in the  grab_noaa.py module.
+
 Written by Todd Schultz
 2018
 """
@@ -15,7 +16,8 @@ import unittest
 import os
 import grab_noaa
 
-PATHNAME = '.'
+
+dfnoaa = grab_noaa.grab_temperatures_noaa();
 
 
 class grab_naoo_UnitTests(unittest.TestCase):
@@ -46,19 +48,12 @@ class grab_naoo_UnitTests(unittest.TestCase):
                 col_names, y_known_column[1]))
         self.assertTrue(pass_test)
 
-    def test_key_columns(self):
-        """Test if 'video_id' and 'language' is a key."""
-        data_table_test = hw3.create_dataframe(PATHNAME)
-        teststr = (data_table_test['video_id'].map(str)
-                   + data_table_test['language'])
-        self.assertTrue(teststr.nunique() == data_table_test.shape[0])
-
-    def test_invalid_path(self):
-        """Test that ValueError exception thrown for invalid path."""
-        invalidpath = os.path.join('.', 'no', 'path', 'should',
-                                   'be', 'named', 'this')
-        with self.assertRaises(ValueError):
-            hw3.create_dataframe(invalidpath)
+    def test_Date_datatypes(self):
+        """Test that column Date is a string data type
+        A string in Pandas is actually an object."""
+        #dfnoaa = grab_noaa.grab_temperatures_noaa();
+        
+        self.assertTrue(dfnoaa.dtypes == 'O')
 
 
 if __name__ == '__main__':

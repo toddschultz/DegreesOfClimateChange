@@ -33,10 +33,10 @@ Tabsolute_C or Tanomaly_C - estimated average global temperature as an absolute 
 This component should create a clear and intuitive graph that compares the temperature estimates from the various data sources. The graph should eloquently handle data that could be in absolute units and deviation units.
 
 ## Design
-graph with time (dates) on the x-axis and two y-axes, one for absolute temperature estimates and another for deviation temperature estimates
+Graph with time (dates) on the x-axis and two y-axes, one for absolute temperature estimates and another for deviation temperature estimates
 
 ## Inputs
-dataframes with two columns (Dates,Tabsolute_C or Tanomaly_C) for each data source (at least two)
+Dataframes with two columns (Dates,Tabsolute_C or Tanomaly_C) for each data source(at least two)
 
 ## Outputs
-graph with one line for each data source
+Graph with one line for each data source

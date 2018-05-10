@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 """grab_noaa retrieves global average temperatures from NOAA.
 
-This python module contains a single function, grab_temperatures_NOAA, that
+This python module contains a single function, grab_NOAA, that
 retrieves the global average temperature anomaly estimates from NOAA. This
 is the climate data that is used to evaluate global climate change.
+
+Syntax
+import grab_noaa
+df_noaa = grab_noaa.grab_noaa()
 
 An overview of the data access available from NOAA is at:
 https://www.ncdc.noaa.gov/cag/global/time-series
@@ -18,10 +22,9 @@ Written by Todd Schultz
 
 import datetime
 import pandas as pd
-import requests
 
 
-def grab_temperatures_noaa():
+def grab_noaa():
     """Retrieves global average temperatures from NOAA.
     Inputs
     None required
@@ -34,11 +37,11 @@ def grab_temperatures_noaa():
     3  1880-4-01       -0.05
     4  1880-5-01       -0.07
     """
-    
     # NOAA Global average temperature time series
     start_year = 1880
     this_year = datetime.datetime.now().year
-    base_url = "https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/1/"
+    base_url = ("https://www.ncdc.noaa.gov/cag/global/" +
+                "time-series/globe/land_ocean/1/")
     end_url = "/" + str(start_year) + "-" + str(this_year) + ".csv"
     header_skip = [0, 1, 2, 3]
     df_noaa = pd.DataFrame(columns=['Year', 'Value', 'Month'])
@@ -52,17 +55,14 @@ def grab_temperatures_noaa():
         
     # check length of dataframe
     assert (df_noaa.shape[0] >= (this_year - start_year)*12), \
-           "Error retrieving data, not enough rows"
+        "Error retrieving data, not enough rows"
     
     # clean up dataframe
-    df_noaa = df_noaa.sort_values(["Year","Month"])
-    df_noaa["Date"] = df_noaa["Year"].astype("str") + "-" + df_noaa["Month"].astype("str") + "-01"
+    df_noaa = df_noaa.sort_values(["Year", "Month"])
+    df_noaa["Date"] = (df_noaa["Year"].astype("str") + "-" +
+                       df_noaa["Month"].astype("str") + "-01")
     df_noaa["Tanomaly_C"] = df_noaa["Value"]
     df_noaa = df_noaa.reset_index()
     df_noaa = df_noaa.drop(columns=["Year", "Value", "Month", "index"])
     
     return df_noaa
-
-
-#get_data = grab_temperatures_noaa()
-#print(get_data.head())

@@ -5,9 +5,9 @@ execution of the grab_noaa.py module. Tests include verifying the number
 of columns, the exact column names, the data types in each column, and more.
 Excceptions thrown for all failed tests.
 
-(class) grab_noaa_UnitTests
+(class) test_grab_noaa
     Python class for unit testing the Python function
-    grab_temperatures_noaa() in the  grab_noaa.py module.
+    grab_noaa() in the  grab_noaa.py module.
 
 Written by Todd Schultz
 2018
@@ -22,7 +22,7 @@ import unittest
 dfnoaa = grab_noaa.grab_noaa()
 
 
-class grab_noaa_UnitTests(unittest.TestCase):
+class test_grab_noaa(unittest.TestCase):
     """Unit tests for validating grab_noaa module."""
 
     def test_column_names(self):
@@ -35,7 +35,7 @@ class grab_noaa_UnitTests(unittest.TestCase):
         pass_test = True
         known_names = ('Date', 'Tanomaly_C')
         pass_test = pass_test & (dfnoaa.shape[1] == len(known_names))
-        col_names = dfoaa.columns
+        col_names = dfnoaa.columns
 
         def is_valid_column(cnames, testcname):
             """Test if column names are a member of the required names."""

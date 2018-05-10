@@ -19,10 +19,10 @@ import grab_noaa
 import unittest
 
 
-dfnoaa = grab_noaa.grab_temperatures_noaa()
+dfnoaa = grab_noaa.grab_noaa()
 
 
-class grab_naoo_UnitTests(unittest.TestCase):
+class grab_noaa_UnitTests(unittest.TestCase):
     """Unit tests for validating grab_noaa module."""
 
     def test_column_names(self):

@@ -8,6 +8,7 @@ Although, ultimately all estimates of the average global temperature are based o
 The project has the following structure:
 
 ```
+.
 ├── DegreesOfClimateChange
 │   ├── NOAAURL.txt
 │   ├── NOAAtoken.txt
@@ -15,18 +16,18 @@ The project has the following structure:
 │   ├── __init__.py
 │   ├── country_iso_codes.csv
 │   ├── doe.json
+│   ├── grab_berkely.py
 │   ├── grab_noaa.py
 │   ├── grab_worldbank.py
 │   ├── tests
 │   │   ├── __init__.py
-│   │   └── test_shablona.py
+│   │   └── test_grab_noaa.py
 │   └── version.py
 ├── LICENSE
-├── Makefile
 ├── README.md
-├── appveyor.yml
 ├── doc
 │   └── design
+│       ├── Components.md
 │       ├── DataSources.txt
 │       ├── GithubStarCount.png
 │       ├── Ideas.md
@@ -36,16 +37,14 @@ The project has the following structure:
 │       ├── UserPersonas.md
 │       ├── Web-scraping\ Comparison\ Example.ipynb
 │       └── designworkflow.md
-├── examples
-│   ├── README.txt
-│   ├── berkeleyearth.ipynb
-│   ├── co2_data_retrieval.ipynb
-│   ├── grab_WorldBank_Module.ipynb
-│   └── noaa_co2_data.ipynb
-├── requirements.txt
-└── setup.py
+└── examples
+    ├── README.txt
+    ├── berkeleyearth.ipynb
+    ├── co2_data_retrieval.ipynb
+    ├── grab_WorldBank_Module.ipynb
+    └── noaa_co2_data.ipynb
 
-5 directories, 31 files
+5 directories, 29 files
 
 ```
 ### Module code

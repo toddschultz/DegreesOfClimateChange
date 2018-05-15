@@ -9,7 +9,8 @@ import pandas as pd
 import sys
 import numpy as np
 
-
+MIN_YEAR = 1901
+MAX_YEAR = 2012
 
 
 def grab_worldbank(start_date = None, end_date = None):
@@ -23,27 +24,28 @@ def grab_worldbank(start_date = None, end_date = None):
     Arguments:
         start_date (int): Starting date in yyyy integer format for the historical data.
                           Default 'None' means 1901, the earliest available year on the World Bank dataset
-        end_date (int): Ending date in yyyy integer format. Default 'None' means 2015.
+        end_date (int): Ending date in yyyy integer format. Default 'None' means 2012.
 
     Returns:
         pandas dataframe: Columns are (Year, Mean Temperature)
 
     """
-    if (not isinstance(start_date, int) or not isinstance(end_date, int)):
+    if (start_date is not None and not isinstance(start_date, int) or
+        end_date is not None and not isinstance(end_date, int)):
         raise ValueError("Error: Invalid argument type. Must be integer")
         sys.exit(0)
-    if (start_date is not None and (start_date < 1901 or start_date > 2015)):
+    if (start_date is not None and (start_date < MIN_YEAR or start_date > MAX_YEAR)):
         raise ValueError("Error: Starting date cannot precede 1901")
         sys.exit(0)
-    if (end_date is not None and (end_date > 2015 or end_date < 1901)):
-        raise ValueError("Error: Ending date cannot exceed 2015")
+    if (end_date is not None and (end_date > MAX_YEAR or end_date < MIN_YEAR)):
+        raise ValueError("Error: Ending date cannot exceed 2012")
         sys.exit(0)
 
     if (start_date is None):
-        start_date = 1901
+        start_date = MIN_YEAR
     if (end_date is None):
-        end_date = 2015
-    print(end_date)
+        end_date = MAX_YEAR
+
 
     """Dictionary to store countries who do NOT HAVE DATA"""
     err_dict = {}
@@ -54,9 +56,11 @@ def grab_worldbank(start_date = None, end_date = None):
     """Obtain ISO country codes for ALL countries in the world"""
     iso_df = pd.read_csv('https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv',
                   delimiter=',')
-    codes_list = np.array(iso_df['ISO3166-1-Alpha-3'])#i.e. [..., DEU, GHA, GIB,...]
-    country_list = np.array(iso_df['official_name_en'])#i.e. [...Germany, Ghana, Gibraltar, ...]
+    codes_list = np.array(iso_df['ISO3166-1-Alpha-3']) #i.e. [..., DEU, GHA, GIB,...]
+    country_list = np.array(iso_df['official_name_en']) #i.e. [...Germany, Ghana, Gibraltar, ...]
 
+    codes_list = list(filter(lambda v: v==v, codes_list))
+    country_list = list(filter(lambda v: v==v, country_list))
 
     """
         Create a 'temporary' _dataset_ of (country, year, average annual temperature) triples.
@@ -79,7 +83,7 @@ def grab_worldbank(start_date = None, end_date = None):
         Create a pandas dataframe from the dataset dictionary
         by parsing the content of the calls to climate_api.get_instrumental(), stored in dataset
     """
-    df = pd.DataFrame(columns=['Country','Year','Temperature'])
+    df = pd.DataFrame(columns=['Country','Date','Tabsolute_C'])
     count = 0
     #For all countries
     for k in range(0,len(code_country_pairs)):
@@ -104,19 +108,20 @@ def grab_worldbank(start_date = None, end_date = None):
         Since we need to return global average temperature, we compute the mean of all
         countries per given year, and store the results in a new dataframe
     """
+    print(".......computing worldwide averages across all years...hang on!!!")
+    df_worldbank = df.groupby(df['Date']).mean()
+    df_worldbank = df_worldbank.reset_index()
 
-    temp_and_year_df = df.groupby(df['Year']).mean()
-    return temp_and_year_df
+    return df_worldbank
 
 
 
 
 def test_output_grab_worldbank():
     """Get global average temperature across all countries worldwide, for
-    1901-2015"""
-    print(" getting data")
+    1901-2012"""
+    print("... getting data")
     wb_data_df = grab_worldbank()
-    print("Now printing (Year, AverageTemperature) tuples ")
     print(wb_data_df.head())
     print("------------------------------------------------------------")
     print(wb_data_df.tail())

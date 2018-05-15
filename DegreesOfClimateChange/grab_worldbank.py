@@ -29,14 +29,21 @@ def grab_worldbank(start_date = None, end_date = None):
         pandas dataframe: Columns are (Year, Mean Temperature)
 
     """
-
-    if (end_date is not None and end_date > 2015):
-        raise ValueError("Error: Starting date cannot exceed 2015")
+    if (not isinstance(start_date, int) or not isinstance(end_date, int)):
+        raise ValueError("Error: Invalid argument type. Must be integer")
+        sys.exit(0)
+    if (start_date is not None and (start_date < 1901 or start_date > 2015)):
+        raise ValueError("Error: Starting date cannot precede 1901")
+        sys.exit(0)
+    if (end_date is not None and (end_date > 2015 or end_date < 1901)):
+        raise ValueError("Error: Ending date cannot exceed 2015")
+        sys.exit(0)
 
     if (start_date is None):
         start_date = 1901
     if (end_date is None):
         end_date = 2015
+    print(end_date)
 
     """Dictionary to store countries who do NOT HAVE DATA"""
     err_dict = {}
@@ -107,7 +114,7 @@ def grab_worldbank(start_date = None, end_date = None):
 def test_output_grab_worldbank():
     """Get global average temperature across all countries worldwide, for
     1901-2015"""
-    print("Print getting data")
+    print(" getting data")
     wb_data_df = grab_worldbank()
     print("Now printing (Year, AverageTemperature) tuples ")
     print(wb_data_df.head())

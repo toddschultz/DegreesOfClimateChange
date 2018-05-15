@@ -1,7 +1,33 @@
-import wbpy
-import pandas as pd
-import sys
-import numpy as np
+# -*- coding: utf-8 -*-
+"""grab_worldbank retrieves global average temperatures from the Worldbank
+https://data.worldbank.org/topic/climate-change
+
+This python module contains a single function, grab_worldbank, that
+retrieves the global average temperature estimates from the Worldbank dataset (Celsius).
+This is the climate data that is used to evaluate global climate change.
+Global averages are computed using yearly data from all countries on earth between
+the years 1901 and 2012.
+
+Usage:
+    To use, one will need to install the 'wbpy' Python packageself.
+    https://github.com/mattduck/wbpy
+    'wbpy' is the recommended directly by the WorldBank as a wrapper library
+    to access its databases. It supports and ensures clean, correct
+    data access, as well as legacy ISO country code formats
+    Install via any standard method, i.e.:
+        pip install wbpy
+
+    function usage is then simple:
+    >>> df = grab_worldbank()
+
+Dependencies:
+    wbpy
+    numpy
+    pandas
+
+Written by Rahul Birmiwal
+2018
+"""
 
 
 import wbpy
@@ -9,25 +35,32 @@ import pandas as pd
 import sys
 import numpy as np
 
-MIN_YEAR = 1901
-MAX_YEAR = 2012
+MIN_YEAR = 1901 #constant defining minimum year value in WorldBank dataset
+MAX_YEAR = 2012 #likewise maximum
 
-
-def grab_worldbank(start_date = None, end_date = None):
-    """
-    ################ FIX THIS DOCSTRING #####################
-    Note: NEED to install wbpy <------- **
-    - wbpy: https://github.com/mattduck/wbpy.
-        * _not an official Python library for the world bank, but is well documented/used, and handles all the intricacies of interfacing with the World Bank RESTFUL API.
-        * Our project will appropriately unittest any and all functions incorporating the wbpy library.
-
-    Arguments:
-        start_date (int): Starting date in yyyy integer format for the historical data.
-                          Default 'None' means 1901, the earliest available year on the World Bank dataset
-        end_date (int): Ending date in yyyy integer format. Default 'None' means 2012.
-
+def grab_worldbank(start_date = 1901, end_date = 2012):
+    """Returns a dataframe of (Year, GlobalAverageTemperature) tuples with data
+       from the WorldBank database. https://data.worldbank.org/topic/climate-change
+    Args:
+        start_date (int): Starting year for data retrieval; minimum 1901. Defaults to 1901
+        end_date (int): End year for data retrieval; maximum 2012. Defaults to 2012
     Returns:
-        pandas dataframe: Columns are (Year, Mean Temperature)
+        pandas dataframe: Dataframe pointing to the results from the worldbank
+    Examples:
+        >>> df = grab_worldbank()
+        >>> print(df.head())
+           Date  Tabsolute_C
+        0  1901    19.002034
+        1  1902    18.882094
+        2  1903    18.925365
+        3  1904    18.835930
+        4  1905    18.877793
+
+        >>> df = grab_worldbank(2011,2012)
+        >>> print(df.head())
+           Date  Tabsolute_C
+        0  2011    19.002201
+        1  2012    19.026535
 
     """
     if (start_date is not None and not isinstance(start_date, int) or
@@ -40,11 +73,6 @@ def grab_worldbank(start_date = None, end_date = None):
     if (end_date is not None and (end_date > MAX_YEAR or end_date < MIN_YEAR)):
         raise ValueError("Error: Ending date cannot exceed 2012")
         sys.exit(0)
-
-    if (start_date is None):
-        start_date = MIN_YEAR
-    if (end_date is None):
-        end_date = MAX_YEAR
 
 
     """Dictionary to store countries who do NOT HAVE DATA"""
@@ -113,18 +141,3 @@ def grab_worldbank(start_date = None, end_date = None):
     df_worldbank = df_worldbank.reset_index()
 
     return df_worldbank
-
-
-
-
-def test_output_grab_worldbank():
-    """Get global average temperature across all countries worldwide, for
-    1901-2012"""
-    print("... getting data")
-    wb_data_df = grab_worldbank()
-    print(wb_data_df.head())
-    print("------------------------------------------------------------")
-    print(wb_data_df.tail())
-
-if __name__ == '__main__':
-    test_output_grab_worldbank()

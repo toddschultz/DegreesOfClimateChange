@@ -24,6 +24,3 @@ script:
 after_success:
 	- coverage reports
 	- coveralls
-
-after_failure:
-	

@@ -1,0 +1,28 @@
+language: python
+
+python: 
+	- 3.5
+	- 3.6
+	
+branches: 
+	only: 
+		- master
+
+install: 
+	- pip install coverage
+	- pip install coveralls
+	- pip install flake8
+	- pip install -r requirements.txt
+	
+before_script:
+	- "flake8 DegreesOfClimateChange"
+	
+script: 
+	- coverage run -m unittest discover
+	
+after_success:
+	- coverage reports
+	- coveralls
+
+after_failure:
+	

@@ -1,5 +1,4 @@
 datetime
-dateutil
 matplotlib
 numpy
 pandas

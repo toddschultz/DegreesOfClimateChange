@@ -39,5 +39,5 @@ def grab_berekely():
 
     return df
 
-df_Berekely = grab_berekely()
-print(df_Berekely.head())
+#df_Berekely = grab_berekely()
+#print(df_Berekely.head())

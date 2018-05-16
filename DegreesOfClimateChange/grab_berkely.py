@@ -25,28 +25,19 @@ import pandas as pd
 
 def grab_berekely():
     """
-    Doc String 
+    Doc String
     """
-    url="http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
-    df=pd.read_csv(url,delim_whitespace = True,index_col=None, skiprows=34, header=None, lineterminator='\n')
-    df.columns = ['Year', 'Month','Monthly Anomaly','Annual Anomaly',
-                'Five-year Anomaly', 'Ten-year Anomaly',
-                'Twenty-year Anomaly','8','9','10','11','12']
-    #print(c.head())
-    df.drop(df.columns[[3,4,5,6,7,8,9,10,11]], axis=1, inplace=True)
-    #print(c.head())
-
-
+    url = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
+    df = pd.read_csv(url, delim_whitespace=True, index_col=None, skiprows=34, header=None, lineterminator='\n')
+    df.columns = ['Year', 'Month', 'Monthly Anomaly', 'Annual Anomaly', 'Five-year Anomaly', 'Ten-year Anomaly', 'Twenty-year Anomaly', '8', '9', '10', '11', '12']
+    df.drop(df.columns[[3, 4, 5, 6, 7, 8, 9, 10, 11]], axis=1, inplace=True)
     # clean up dataframe
-    df = df.sort_values(["Year", "Month"])
-    df["Date"] = (df["Year"].astype("str") + "-" +
-                        df["Month"].astype("str") + "-01")
+    # df = df.sort_values(["Year", "Month"])
+    df["Date"] = (df["Year"].astype("str") + "-" + df["Month"].astype("str") + "-01")
     df["Tanomaly_C"] = df["Monthly Anomaly"]
-    df.drop(df.columns[[0,1,2]], axis=1, inplace=True)
-    #c = c.reset_index()
-    #print(c.head())
+    df.drop(df.columns[[0, 1, 2]], axis=1, inplace=True)
 
     return df
 
-df_berekely = grab_berekely()
-print(df_berekely.head())    
+df_Berekely = grab_berekely()
+print(df_Berekely.head())

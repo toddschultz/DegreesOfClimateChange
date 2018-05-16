@@ -1,6 +1,7 @@
 ## Degrees of (Climate) Change
 
 [![Build Status](https://travis-ci.org/toddschultz/DegreesOfClimateChange.svg?branch=master)](https://travis-ci.org/toddschultz/DegreesOfClimateChange)
+[![Coverage Status](https://coveralls.io/repos/github/toddschultz/DegreesOfClimateChange/badge.svg?branch=master)](https://coveralls.io/github/toddschultz/DegreesOfClimateChange?branch=master)
 
 The climate of the planet has been in continual flux throughout the ages. We know of ice ages that created glaciers miles thick, we know of tropical periods that allowed the dinosaur to flurish. Recent times have seen the industrial age create unseen wealth, prosparity, opportunity, and pollution. The evidence indicates that our pollution in disrupting the natural climate of the planet and causing a shift in the global temperatures. However, the people  of the world are divided on the interupation of the evidence not from differences in data or methods but because of political reasons and self-interest. The goal of this work is to create a simple comparison of various estimates of the average global temperature. 
 Although, ultimately all estimates of the average global temperature are based on the same pool of global temperature observations, the comparison is insightful to verify the processing applied by each source such as selection of observations and computational processing. 

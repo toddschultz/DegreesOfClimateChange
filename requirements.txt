@@ -3,3 +3,4 @@ dateutil
 matplotlib
 numpy
 pandas
+wbpy

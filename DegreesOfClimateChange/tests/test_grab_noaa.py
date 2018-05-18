@@ -14,12 +14,11 @@ Written by Todd Schultz
 """
 
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
-import grab_noaa
+from DegreesOfClimateChange.grab_noaa import grab_noaa
 import unittest
 
 
-dfnoaa = grab_noaa.grab_noaa()
+dfnoaa = grab_noaa()
 
 
 class test_grab_noaa(unittest.TestCase):
@@ -60,9 +59,8 @@ class test_grab_noaa(unittest.TestCase):
         returned in the data frame."""
         start_date = datetime.strptime(dfnoaa["Date"].iloc[0], '%Y-%m-%d')
         end_date = datetime.strptime(dfnoaa["Date"].iloc[-1], '%Y-%m-%d')
-        r = relativedelta(end_date, start_date)
-        n_months = 12*r.years + r.months + 1
-        
+        n_months = (12*(end_date.year-start_date.year) +
+                    (end_date.month - start_date.month) + 1)
         self.assertTrue(n_months == dfnoaa.shape[0])
 
 

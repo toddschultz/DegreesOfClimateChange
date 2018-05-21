@@ -46,21 +46,23 @@ def grab_worldbank(start_date = 1901, end_date = 2012):
         end_date (int): End year for data retrieval; maximum 2012. Defaults to 2012
     Returns:
         pandas dataframe: Dataframe pointing to the results from the worldbank
+                          Columns are of type Date (yyyy-mm-dd string); Tabsolute_C (float)
+                          NOTE: January 1st chosen as a dummy month-date for each year
     Examples:
         >>> df = grab_worldbank()
         >>> print(df.head())
-           Date  Tabsolute_C
-        0  1901    19.002034
-        1  1902    18.882094
-        2  1903    18.925365
-        3  1904    18.835930
-        4  1905    18.877793
+           Date          Tabsolute_C
+        0  1901-01-01    19.002034
+        1  1902-01-01    18.882094
+        2  1903-01-01    18.925365
+        3  1904-01-01    18.835930
+        4  1905-01-01    18.877793
 
         >>> df = grab_worldbank(2011,2012)
         >>> print(df.head())
            Date  Tabsolute_C
-        0  2011    19.002201
-        1  2012    19.026535
+        0  2011-01-01    19.002201
+        1  2012-01-01    19.026535
 
     """
     if (start_date is not None and not isinstance(start_date, int) or
@@ -140,4 +142,11 @@ def grab_worldbank(start_date = 1901, end_date = 2012):
     df_worldbank = df.groupby(df['Date']).mean()
     df_worldbank = df_worldbank.reset_index()
 
+    ### Convert DATE columns to yyyy-mm-dd format!
+    df_worldbank['Date'] = df['Date'].astype(str) + '-01-01'
+
     return df_worldbank
+
+if __name__ == '__main__':
+    df = grab_worldbank(2011,2012)
+    print(df.head())

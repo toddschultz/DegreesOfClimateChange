@@ -50,7 +50,7 @@ class TestGrabWorldbank(unittest.TestCase):
     def setUp(self):
         """ natively called by the Python unittesting framework """
         print('In setUp()')
-        self.fixture = grab_worldbank.grab_worldbank(2010,2012)
+        self.fixture = grab_worldbank(2010,2012)
 
     @ignore_warnings
     def test_datatypes(self):
@@ -91,16 +91,16 @@ class TestGrabWorldbank(unittest.TestCase):
                             because exceeds the year 2012
         """
 
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, 'foo', 'baz')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, '', 'baz')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, 'foo', '')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, '1901', '2012')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, '$&', None)
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, None, '$&')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, -MIN_YEAR, MAX_YEAR)
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, MIN_YEAR, -MAX_YEAR)
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, 0, 0)
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, None, datetime.datetime.now().year)
+        self.assertRaises(ValueError, grab_worldbank, 'foo', 'baz')
+        self.assertRaises(ValueError, grab_worldbank, '', 'baz')
+        self.assertRaises(ValueError, grab_worldbank, 'foo', '')
+        self.assertRaises(ValueError, grab_worldbank, '1901', '2012')
+        self.assertRaises(ValueError, grab_worldbank, '$&', None)
+        self.assertRaises(ValueError, grab_worldbank, None, '$&')
+        self.assertRaises(ValueError, grab_worldbank, -MIN_YEAR, MAX_YEAR)
+        self.assertRaises(ValueError, grab_worldbank, MIN_YEAR, -MAX_YEAR)
+        self.assertRaises(ValueError, grab_worldbank, 0, 0)
+        self.assertRaises(ValueError, grab_worldbank, None, datetime.datetime.now().year)
 
     def tearDown(self):
         """ natively called by the Python unittesting framework """

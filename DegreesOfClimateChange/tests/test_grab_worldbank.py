@@ -17,10 +17,10 @@ Written by Rahul Birmiwal
 
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
-import grab_worldbank
+from DegreesOfClimateChange.grab_worldbank import grab_worldbank
 import unittest
 import datetime
-import warnings
+import warningss
 
 def ignore_warnings(test_func):
     """Decorator to ignore specific warnings during unittesting"""

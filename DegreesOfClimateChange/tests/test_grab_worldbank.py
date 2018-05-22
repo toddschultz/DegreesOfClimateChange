@@ -46,9 +46,6 @@ def ignore_warnings(test_func):
 class TestGrabWorldbank(unittest.TestCase):
     """ Unit tests for validating grab_worldbank.py module"""
 
-    min_year = grab_worldbank.MIN_YEAR
-    max_year = grab_worldbank.MAX_YEAR
-
     @ignore_warnings
     def setUp(self):
         """ natively called by the Python unittesting framework """

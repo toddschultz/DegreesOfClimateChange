@@ -20,7 +20,7 @@ sys.path.append("..") # Adds higher directory to python modules path.
 from DegreesOfClimateChange.grab_worldbank import grab_worldbank
 import unittest
 import datetime
-import warningss
+import warnings
 
 def ignore_warnings(test_func):
     """Decorator to ignore specific warnings during unittesting"""

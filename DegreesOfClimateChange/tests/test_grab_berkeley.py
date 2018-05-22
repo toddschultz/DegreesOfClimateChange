@@ -13,11 +13,13 @@ Written by Abhishek Anand
 2018
 """
 
-
+import sys
+sys.path.append("..") 
+#from DegreesOfClimateChange.grab_berkeley import grab_berkeleydf
+from grab_berkeley import grab_berkeleydf
 import unittest
-from DegreesOfClimateChange.grab_berkeley import grab_berkeley
 
-dfberkeley = grab_berkeley()
+dfberkeley = grab_berkeleydf()
 
 class test_grab_erkeley(unittest.TestCase):
     """Unit tests for validating grab_berkeleymodule."""

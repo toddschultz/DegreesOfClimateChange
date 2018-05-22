@@ -22,6 +22,10 @@ import unittest
 import datetime
 import warnings
 
+MIN_YEAR = 1901 #constant defining minimum year value in WorldBank dataset
+MAX_YEAR = 2012 #likewise maximum
+
+
 def ignore_warnings(test_func):
     """Decorator to ignore specific warnings during unittesting"""
 
@@ -96,8 +100,8 @@ class TestGrabWorldbank(unittest.TestCase):
         self.assertRaises(ValueError, grab_worldbank.grab_worldbank, '1901', '2012')
         self.assertRaises(ValueError, grab_worldbank.grab_worldbank, '$&', None)
         self.assertRaises(ValueError, grab_worldbank.grab_worldbank, None, '$&')
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, -TestGrabWorldbank.min_year, TestGrabWorldbank.max_year)
-        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, TestGrabWorldbank.min_year, -TestGrabWorldbank.max_year)
+        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, -MIN_YEAR, MAX_YEAR)
+        self.assertRaises(ValueError, grab_worldbank.grab_worldbank, MIN_YEAR, -MAX_YEAR)
         self.assertRaises(ValueError, grab_worldbank.grab_worldbank, 0, 0)
         self.assertRaises(ValueError, grab_worldbank.grab_worldbank, None, datetime.datetime.now().year)
 

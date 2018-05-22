@@ -24,7 +24,7 @@ Written by Abhishek Anand
 import pandas as pd
 
 
-def grab_berkeleydf():
+def grab_berkeley():
     """
     Doc String
     """

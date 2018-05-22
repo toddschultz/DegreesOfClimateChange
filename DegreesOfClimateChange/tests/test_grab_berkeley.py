@@ -15,15 +15,13 @@ Written by Abhishek Anand
 
 import sys
 sys.path.append("../")
-from grab_berkeley import grab_berkeleydf
+from DegreesOfClimateChange.grab_berkeley import grab_berkeley
 import unittest
-#from DegreesOfClimateChange.grab_berkeley import grab_berkeleydf
 
 
+dfberkeley = grab_berkeley()
 
-dfberkeley = grab_berkeleydf()
-
-class test_grab_erkeley(unittest.TestCase):
+class test_grab_berkeley(unittest.TestCase):
     """Unit tests for validating grab_berkeleymodule."""
 
     def test_checkRowSize(self):

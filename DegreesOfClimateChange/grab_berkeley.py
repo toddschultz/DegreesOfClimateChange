@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""grab_noaa retrieves global average temperatures from NOAA.
+"""grab_berkeley retrieves global average temperatures from Berekeley Earth.
 
 This python module contains a single function, grab_berekely, that
 retrieves the global average temperature anomaly estimates from Berekely. This
@@ -24,21 +24,21 @@ Written by Abhishek Anand
 import pandas as pd
 
 
-def grab_berkeley():
+def grab_berkeleydf():
     """
     Doc String
     """
     url = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
-    df = pd.read_csv(url, delim_whitespace=True, index_col=None, skiprows=34, header=None, lineterminator='\n')
-    df.columns = ['Year', 'Month', 'Monthly Anomaly', 'Annual Anomaly', 'Five-year Anomaly', 'Ten-year Anomaly', 'Twenty-year Anomaly', '8', '9', '10', '11', '12']
-    df.drop(df.columns[[3, 4, 5, 6, 7, 8, 9, 10, 11]], axis=1, inplace=True)
+    df_berkeley = pd.read_csv(url, delim_whitespace=True, index_col=None, skiprows=34, header=None, lineterminator='\n')
+    df_berkeley.columns = ['Year', 'Month', 'Monthly Anomaly', 'Annual Anomaly', 'Five-year Anomaly', 'Ten-year Anomaly', 'Twenty-year Anomaly', '8', '9', '10', '11', '12']
+    df_berkeley.drop(df_berkeley.columns[[3, 4, 5, 6, 7, 8, 9, 10, 11]], axis=1, inplace=True)
     # clean up dataframe
     # df = df.sort_values(["Year", "Month"])
-    df["Date"] = (df["Year"].astype("str") + "-" + df["Month"].astype("str") + "-01")
-    df["Tanomaly_C"] = df["Monthly Anomaly"]
-    df.drop(df.columns[[0, 1, 2]], axis=1, inplace=True)
+    df_berkeley["Date"] = (df_berkeley["Year"].astype("str") + "-" + df_berkeley["Month"].astype("str") + "-01")
+    df_berkeley["Tanomaly_C"] = df_berkeley["Monthly Anomaly"]
+    df_berkeley.drop(df_berkeley.columns[[0, 1, 2]], axis=1, inplace=True)
 
-    return df
+    return df_berkeley
 
-#df_Berekely = grab_berkeley()
+#df_Berekely = grab_berkeleydf()
 #print(df_Berekely.head())

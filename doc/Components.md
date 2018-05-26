@@ -29,11 +29,13 @@ clean dataframe with two columns, Date and Tanomaly_C or Tabsolute_C
 Date - date string with a minimum of the month and year for the average global temperature estimates
 Tabsolute_C or Tanomaly_C - estimated average global temperature as an absolute or deviation, respectively, in units of degrees Celsius
 
-# Comparison visualization
-This component should create a clear and intuitive graph that compares the temperature estimates from the various data sources. The graph should eloquently handle data that could be in absolute units and deviation units.
+# Comparison visualizations
+This component should create a set clear and intuitive graphs that compares the temperature estimates from the various data sources. The graphs should eloquently handle data that could be in absolute units and deviation units. Note, after working with the data it was determined that a single graph would be inefficient and incomplete demonstrate the comparison. Thus this component was modified to include multiple graphs. 
 
-## Design
-Graph with time (dates) on the x-axis and two y-axes, one for absolute temperature estimates and another for deviation temperature estimates
+## Design 
+1. Graph with a subplot for each data source provided. The subplots should have time (dates) on the x-axis and temperature on the y-axes. The ranges for all of the x-axis should be the same, the maximum date range. The ranges for the y-axes should be the same for any subplots that are absolute temperature estimates and the same for any subplots that are for anomaly or deviation temperature estimates. This provide quick understanding of each data source individually and any overview or gross tends between the data sources. 
+
+2. Graph with a subplotsfor overlaying the anomaly temperature estimate and a subplot for overlaying the absolute temperature estimates, so long as there are at least two data sources. This will provide quicker comparison of the tends and numeric values. 
 
 ## Inputs
 Dataframes with two columns (Dates,Tabsolute_C or Tanomaly_C) for each data source(at least two)

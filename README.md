@@ -52,10 +52,10 @@ The project has the following structure:
 ```
 ### Module code
 
-- grab_noaa retrieves global average temperatures (in anomaly units) from National Oceanic and Atmospheric Administration (NOAA)
-- grab_worldbank retreives global average temperatures across all countries on earth between 1901 and 2012, in units degrees   Celsius, from the WorldBank dataset 
-- grab_berkeley retrieves global average temperatures (in anomaly units) using data from BerkeleyEarth
-- grab_co2_scripps retrieves _CO2_ data in units parts-per-million from various sampling stations across the globe, as part of the Scripps Institute for Oceanography at UCSD
+- `grab_noaa` retrieves global average temperatures (in anomaly units) from National Oceanic and Atmospheric Administration (NOAA)
+- `grab_worldbank` retreives global average temperatures across all countries on earth between 1901 and 2012, in units degrees   Celsius, from the WorldBank dataset 
+- `grab_berkeley` retrieves global average temperatures (in anomaly units) using data from BerkeleyEarth
+- `grab_co2_scripps` retrieves _CO2_ data in units parts-per-million from various sampling stations across the globe, as part of the Scripps Institute for Oceanography at UCSD
 
 ### Project Data
 

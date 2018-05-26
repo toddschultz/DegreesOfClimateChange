@@ -14,18 +14,22 @@ The project has the following structure:
 .
 ├── DegreesOfClimateChange
 │   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── grab_berkeley.cpython-36.pyc
+│   │   ├── grab_noaa.cpython-36.pyc
+│   │   └── grab_worldbank.cpython-36.pyc
 │   ├── country_iso_codes.csv
 │   ├── doe.json
-│   ├── grab_berkely.py
+│   ├── grab_berkeley.py
+│   ├── grab_co2_scripps.py
 │   ├── grab_noaa.py
 │   ├── grab_worldbank.py
-|   ├── grab_co2_scripps.py
 │   ├── tests
 │   │   ├── __init__.py
 │   │   ├── test_grab_berkeley.py
-│   │   ├── test_grab_worldbank.py
 │   │   ├── test_grab_co2_scripps.py
-│   │   └── test_grab_noaa.py
+│   │   ├── test_grab_noaa.py
+│   │   └── test_grab_worldbank.py
 │   └── version.py
 ├── LICENSE
 ├── README.md
@@ -39,15 +43,20 @@ The project has the following structure:
 │   ├── UseCases.md
 │   ├── UserPersonas.md
 │   ├── Web-scraping\ Comparison\ Example.ipynb
+│   ├── design
 │   └── designworkflow.md
-└── examples
-    ├── README.txt
-    ├── berkeleyearth.ipynb
-    ├── co2_data_retrieval.ipynb
-    ├── grab_WorldBank_Module.ipynb
-    └── noaa_co2_data.ipynb
-
-5
+├── examples
+│   ├── GlobalTemperatureComparison-Abhishek.ipynb
+│   ├── GlobalTemperatureComparison-Birmiwal.ipynb
+│   ├── GlobalTemperatureComparison-Final.ipynb
+│   ├── GlobalTemperatureComparison-TS.ipynb
+│   ├── README.txt
+│   ├── __init__.py
+│   ├── berkeleyearth.ipynb
+│   ├── co2_data_retrieval.ipynb
+│   ├── grab_WorldBank_Module.ipynb
+│   └── noaa_co2_data.ipynb
+└── requirements.txt
 
 ```
 ### Module code

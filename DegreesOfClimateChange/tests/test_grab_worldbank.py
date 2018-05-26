@@ -6,7 +6,7 @@ of columns, the exact column names, the data types in each column. Furthermore,
 this testing module ensures that exception handling of arguments to grab_worldbank()
 is done correctly, and raises approrpriate errors if need be.
 
-(class) test_grab_noaa
+(class) TestGrabWorldbank
     Python class for unit testing the Python function
     grab_worldbank(arg1, arg2) in the  grab_worldbank.py module.
 

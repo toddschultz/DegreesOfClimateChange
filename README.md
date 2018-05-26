@@ -13,9 +13,6 @@ The project has the following structure:
 ```
 .
 ├── DegreesOfClimateChange
-│   ├── NOAAURL.txt
-│   ├── NOAAtoken.txt
-│   ├── NOAAtokenTemplate.txt
 │   ├── __init__.py
 │   ├── country_iso_codes.csv
 │   ├── doe.json
@@ -29,17 +26,16 @@ The project has the following structure:
 ├── LICENSE
 ├── README.md
 ├── doc
-│   └── design
-│       ├── Components.md
-│       ├── DataSources.txt
-│       ├── GithubStarCount.png
-│       ├── Ideas.md
-│       ├── TechnologyReview.md
-│       ├── TechnologyReview.pptx
-│       ├── UseCases.md
-│       ├── UserPersonas.md
-│       ├── Web-scraping\ Comparison\ Example.ipynb
-│       └── designworkflow.md
+│   ├── Components.md
+│   ├── DataSources.txt
+│   ├── GithubStarCount.png
+│   ├── Ideas.md
+│   ├── TechnologyReview.md
+│   ├── TechnologyReview.pptx
+│   ├── UseCases.md
+│   ├── UserPersonas.md
+│   ├── Web-scraping\ Comparison\ Example.ipynb
+│   └── designworkflow.md
 └── examples
     ├── README.txt
     ├── berkeleyearth.ipynb
@@ -47,16 +43,21 @@ The project has the following structure:
     ├── grab_WorldBank_Module.ipynb
     └── noaa_co2_data.ipynb
 
-5 directories, 29 files
+5
 
 ```
 ### Module code
 
-Describe the modules
+grab_noaa retrieves global average temperatures from National Oceanic and Atmospheric Administration (NOAA)
 
 ### Project Data
 
-Add description and citation for all data sources completed
+Zhang, H.-M., B. Huang, J. Lawrimore, M. Menne, Thomas M. Smith, NOAA Global Surface Temperature Dataset (NOAAGlobalTemp), Version 4.0 NOAA Global Surface Temperature Data. NOAA National Centers for Environmental Information. doi:10.7289/V5FN144H.
+
+Required Citations For Scripps Data:
+
+II. Macfarling Meure, C. et al., 2006: Law Dome CO2, CH4 and N2O ice core records extended to 2000 years BP. Geophysical Research Letters, 33.
+III. C. D. Keeling, S. C. Piper, R. B. Bacastow, M. Wahlen, T. P. Whorf, M. Heimann, and H. A. Meijer, Exchanges of atmospheric CO2 and 13CO2 with the terrestrial biosphere and oceans from 1978 to 2000. I. Global aspects, SIO Reference Series, No. 01-06, Scripps Institution of Oceanography, San Diego, 88 pages, 2001"
 
 ### Installation
 

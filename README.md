@@ -16,6 +16,7 @@ The project has the following structure:
 │   ├── __init__.py
 │   ├── __pycache__
 │   │   ├── grab_berkeley.cpython-36.pyc
+│   │   ├── grab_co2_scripps.cpython-36.pyc
 │   │   ├── grab_noaa.cpython-36.pyc
 │   │   └── grab_worldbank.cpython-36.pyc
 │   ├── country_iso_codes.csv
@@ -50,14 +51,16 @@ The project has the following structure:
 │   ├── GlobalTemperatureComparison-Birmiwal.ipynb
 │   ├── GlobalTemperatureComparison-Final.ipynb
 │   ├── GlobalTemperatureComparison-TS.ipynb
-│   ├── README.txt
 │   ├── __init__.py
 │   ├── berkeleyearth.ipynb
 │   ├── co2_data_retrieval.ipynb
 │   ├── grab_WorldBank_Module.ipynb
 │   └── noaa_co2_data.ipynb
-└── requirements.txt
+├── requirements.txt
+├── requirements2.txt
+└── setup.py
 
+6 directories, 41 files
 ```
 ### Module code
 

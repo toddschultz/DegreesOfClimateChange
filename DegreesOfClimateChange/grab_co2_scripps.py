@@ -35,14 +35,12 @@ Output:
            stations defined above
 
 Dependencies:
-    numpy
     pandas
 
 Written by Rahul Birmiwal
 2018
 """
 
-import numpy as np
 import pandas as pd
 
 
@@ -74,20 +72,20 @@ def grab_scripps_co2_data():
             'http://scrippsco2.ucsd.edu/assets/data/atmospheric/stations/merged_in_situ_and_flask/monthly/monthly_merge_co2_spo.csv']
 
     # labels
-    locations = ['Alert_CAN','LaJolla_USA','ChristmasIsland_AUS','AmericanSamoa_ASM','SouthPole_ANT']
+    locations = ['Alert_CAN', 'LaJolla_USA', 'ChristmasIsland_AUS', 'AmericanSamoa_ASM', 'SouthPole_ANT']
 
     # dataframe to store results
     master_df = pd.DataFrame(dtype=float)
     count = 0
     for link in links:
-        station_df = pd.read_csv(link,comment = '"',delimiter=",",header=None) #read in a dataframe for _this_ station
+        station_df = pd.read_csv(link,comment='"', delimiter=",", header=None) #read in a dataframe for _this_ station
 
         #Add column denoting _this_ substation location
         station_df['Location'] = locations[count]
         count += 1
 
         #only get the columns we care about...
-        station_df = station_df.iloc[:,[0,4,10]]
+        station_df = station_df.iloc[:, [0, 4, 10]]
         master_df = master_df.append(station_df)
 
     master_df = master_df.iloc[5:] #get rid of garbage at the top of the frame

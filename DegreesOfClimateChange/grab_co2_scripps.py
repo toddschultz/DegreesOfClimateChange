@@ -31,8 +31,8 @@ Usage:
 
 Output:
     Relation/Dataframe -> R(Date, CO2 (ppm)),
-    where 'CO2 (ppm)' is the average CO2 measurement averaged across all locations
-    per year
+    where 'CO2 (ppm)' is the average CO2 measurement averaged across the sampling
+           stations defined above
 
 Dependencies:
     numpy
@@ -54,18 +54,17 @@ def grab_scripps_co2_data():
     Args:
         None
     Returns:
-        pandas dataframe: Dataframe pointing to the results from the worldbank
-                          Columns are of type Date (yyyy-mm-dd string); CO2 (float)
-                          NOTE: January 1st chosen as a dummy month-date for each year
+        pandas dataframe: Dataframe pointing to the CO2 measurement per annum
     Examples:
         >>> df = grab_co2_scripps()
         >>> print(df.head())
-           Date          Tabsolute_C
-        0  1901-01-01    19.002034
-        1  1902-01-01    18.882094
-        2  1903-01-01    18.925365
-        3  1904-01-01    18.835930
-        4  1905-01-01    18.877793
+                  Date         CO2
+        0   1957-01-01  313.625000
+        1   1958-01-01  314.706667
+        2   1959-01-01  315.635000
+        3   1960-01-01  316.616667
+        4   1961-01-01  317.387500
+        5   1962-01-01  317.364444
     """
     # url links to data
     links = ['http://scrippsco2.ucsd.edu/assets/data/atmospheric/stations/flask_co2/monthly/monthly_flask_co2_alt.csv',

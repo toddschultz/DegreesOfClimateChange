@@ -37,6 +37,7 @@ The project has the following structure:
 ├── doc
 │   ├── Components.md
 │   ├── DataSources.txt
+│   ├── DegreesOfClimateChangeSummary.pptx
 │   ├── GithubStarCount.png
 │   ├── Ideas.md
 │   ├── TechnologyReview.md
@@ -47,20 +48,16 @@ The project has the following structure:
 │   ├── design
 │   └── designworkflow.md
 ├── examples
-│   ├── GlobalTemperatureComparison-Abhishek.ipynb
-│   ├── GlobalTemperatureComparison-Birmiwal.ipynb
 │   ├── GlobalTemperatureComparison-Final.ipynb
-│   ├── GlobalTemperatureComparison-TS.ipynb
 │   ├── __init__.py
 │   ├── berkeleyearth.ipynb
 │   ├── co2_data_retrieval.ipynb
 │   ├── grab_WorldBank_Module.ipynb
 │   └── noaa_co2_data.ipynb
 ├── requirements.txt
-├── requirements2.txt
 └── setup.py
 
-6 directories, 41 files
+6 directories, 44 files
 ```
 ### Module code
 

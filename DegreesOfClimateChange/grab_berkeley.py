@@ -26,7 +26,26 @@ import pandas as pd
 
 def grab_berkeley():
     """
-    Doc String
+    Returns a dataframe of (Date, Tanomaly_C) tuples with data
+    from the Berkeley Earth.
+    Note: Temperatures are in Celsius and reported as anomalies 
+            relative to the Jan 1951-Dec 1980 average.
+            Estimated Jan 1951-Dec 1980 absolute temperature (C): 8.64
+
+    Args:
+        None
+    Returns:
+        pandas dataframe: Dataframe pointing to the temperature measurement on monthly basis
+    Examples:
+        >>> df_Berekely = grab_berkeley()
+        >>>  print(df_Berekely.head())
+                    Date  Tanomaly_C
+            0  1750-1-01       0.382
+            1  1750-2-01       0.539
+            2  1750-3-01       0.574
+            3  1750-4-01       0.382
+            4  1750-5-01         NaN
+    
     """
     url = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
     df_berkeley = pd.read_csv(url, delim_whitespace=True, index_col=None, skiprows=34, header=None, lineterminator='\n')
@@ -40,5 +59,5 @@ def grab_berkeley():
 
     return df_berkeley
 
-#df_Berekely = grab_berkeleydf()
+#df_Berekely = grab_berkeley()
 #print(df_Berekely.head())

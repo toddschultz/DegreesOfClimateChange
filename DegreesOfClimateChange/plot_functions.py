@@ -22,9 +22,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+
 def plot_each_temperature(df_noaa, df_berkeley, df_wb):
-    """plot_each_temperature plots each temperature estimate on seperate 
-    subplot
+    """plot_each_temperature plots each temperature estimate on seperate plots
     
     Create a simple line graph of the provided temperatures in the input
     dataframes where each temperature estimate source is plotted seperately

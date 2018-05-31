@@ -40,7 +40,7 @@ Line graph available in the final notebook product that has a line for each data
 
 
 ### Question 3
-How do I add another agency’s estimate?
+How do I get or add another agency’s estimate?
 
 Sally, being a scientist, will likely want to add additional data sources and agency estimates to expand and improve the analysis. The data sources already provided in the notebook should provide examples of how to build functions to retrieve, process, and organize the data from various agencies. Sally would also like simple, well-written instructions to help guide her through process of contructing the data access functions and integrating the new data set into the exiting notebook and graph. 
 

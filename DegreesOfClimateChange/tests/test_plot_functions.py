@@ -30,12 +30,7 @@ class test_plot_functions(unittest.TestCase):
     
     def test_plot_each_temperature(self):
         """Test error free execution of plot_each_temperature"""
-        raised = False
-        try:
-            hf = pf.plot_each_temperature(df_noaa, df_berkeley, df_wb)
-        except:
-                raised = True
-        self.assertFalse(raised, 'Exception raised')
+        hf = pf.plot_each_temperature(df_noaa, df_berkeley, df_wb)
         self.assertTrue(hf)
 
 

@@ -21,6 +21,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from functools import reduce
 
 
 def plot_each_temperature(df_noaa, df_berkeley, df_wb):
@@ -104,7 +105,7 @@ def plot_each_temperature(df_noaa, df_berkeley, df_wb):
 
 # next plot function
 
-def plot_each_absolute_temperature(df_noaa, df_berkeley, db_wb, do_plot, figNum):
+def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum):
     yearly_noaa = df_noaa.groupby(df_noaa['Date'].map(lambda x: pd.to_datetime(x).year)).mean()
     yearly_noaa = yearly_noaa.reset_index()
     yearly_noaa['Date'] = yearly_noaa['Date'].astype(str) + '-01-01' #reset Date to proper format
@@ -128,7 +129,7 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, db_wb, do_plot, figNum)
                      'WorldBank':df_wb['Tabsolute_C']
                     }
         x_linspace = {'NOAA':dates_yearly_noaa, 'Berkeley':dates_yearly_ber,
-                     'WorldBank':'dateswb'
+                     'WorldBank':dateswb
                      }
         return (plot_data, x_linspace)
     else:
@@ -156,38 +157,45 @@ def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, figNum):
         lst3 = [value for value in lst1 if value in lst2]
         return lst3
     """
-    (temp_plot_data, x_linspace) = plot_each_absolute_temperature(df_noaa, df_berkeley, db_wb, False, 0)
-    noaa_data = temp_plot_data['NOAA']
-    berkeley_data = temp_plot_data['Berkeley']
-    wb_data = temp_plot_data['WorldBank']
+    # Get the data source dictionary and their respective x-axes
+    (data_dict, axes_dict) = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, False, 0)
+    co2_data = df_co2["CO2"]
+    data_dict['Scripps'] = co2_data #add co2 data to the 'data source dictionary'
 
-    noaa_xs = x_linspace['NOAA']
-    berkeley_xs = x_linspace['Berkeley']
-    wb_xs = x_linspace['WorldBank']
-    co2_xs = pd.to_datetime(df_co2['Date'])
+    co2_xs = matplotlib.dates.date2num(pd.to_datetime(df_co2['Date']))
+    axes_dict['Scripps'] = co2_xs #likewise for the x-axes
 
-    all_dates = [noaa_xs, berkeley_xs, wb_xs, co2_xs]
-    common_dates = list(reduce(set.intersection, [set(elem) for elem in all_dates ]))
+    common_dates =  list(map(int, (list(reduce(lambda x,y: x&y, [set(xs) for xs in axes_dict.values()])))))
+    """
+    for agency_name, data in data_dict.items():
+        mask = np.isin(axes_dict[agency_name], common_dates)
+        masked_data = [data[i] for i in range(len(data)) if mask[i]]
+        data_dict[agency_name] = masked_data
 
-    # convert to matplotlib required formatting
-    dates  = matplotlib.dates.date2num(common_dates)
+        """
+
     # Create comparison graph
-    hf = plt.figure(figNum)
+
     fig, ax1 = plt.subplots()
 
     color1 = 'tab:blue'
     ax1.set_xlabel('Date')
-    ax1.set_ylabel('Global Avg. Temperature (deg C)', color=color1)
-    ax1.plot_date(dates, wb_data, color='24D3E5', label='WorldBank'linestyle='solid',alpha=0.5, marker='.')
-    ax1.plot_date(dates, noaa_data, color='218EE2', label='NOAA'linestyle='solid',alpha=0.5, marker='.')
-    ax1.plot_date(dates, berkeley_data, color='213CE2', label='Berkeley'linestyle='solid',alpha=0.5, marker='.')
+    ax1.set_ylabel('Global Avg. Temperature (deg C)', color='#9293b4')
+    ax1.plot_date(axes_dict['WorldBank'], data_dict['WorldBank'], color=color1,
+                            label='WorldBank',linestyle='solid',alpha=0.5,marker=None)
+    ax1.plot_date(axes_dict['NOAA'], data_dict['NOAA'], color='#62A8E1',
+                            label='NOAA',linestyle='solid',alpha=0.5, marker=None)
+    ax1.plot_date(axes_dict['Berkeley'], data_dict['Berkeley'], color='#27435A',
+                            label='Berkeley',linestyle='solid',alpha=0.3, marker=None)
     ax1.tick_params(axis='y', labelcolor=color1)
+    ax1.legend()
     ax2 = ax1.twinx()  # second axes that shares the same x-axis
 
     color2 = 'tab:red'
     ax2.set_ylabel('CO2 (ppm)', color=color2)
-    ax2.plot_date(dates, co2_dataframe["CO2"], color=color2, linestyle='dashed', marker='o')
+    ax2.plot_date(axes_dict['Scripps'], data_dict['Scripps'], label='CO2', color=color2, linestyle='dashed', marker=None)
     ax2.tick_params(axis='y', labelcolor=color2)
 
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    return hf
+    ax2.legend(loc=3)
+    plt.show()

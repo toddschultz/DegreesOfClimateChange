@@ -23,6 +23,34 @@ import numpy as np
 import pandas as pd
 from functools import reduce
 
+def valid_plotting_dataframe(df):
+    """valid_plotting_dataframe is a function to test that _df_ is a valid
+       dataframe that can be used in the plot_ functions. We use this function
+       because unittesting is tricky/odd-behavior when applied to visualizations
+
+    Inputs:
+        - df (pandas Dataframe): df is a dataframe of date, data pairs i.e
+                                 df -> R(Date, TempData) where Date is a String;
+                                                             TempData is a Float
+    Output:
+        - None
+    Raises:
+        - ValueError if df is not a valid dataframe to plot
+
+    """
+
+    if (not isinstance(df, pd.DataFrame)):
+        raise ValueError("Arguments must be dataframe produced by a grab_ function !! ")
+    cols = df.columns.values
+    if len(cols) != 2:
+        raise ValueError("Dataframe must have 2 columns")
+    if (cols[0] != 'Date'):
+        raise ValueError("First column must be date column ")
+    if (df[cols[1]].dtype != 'float'):
+        raise ValueError("Second column must be float type ")
+    return
+
+
 
 def plot_each_temperature(df_noaa, df_berkeley, df_wb):
     """plot_each_temperature plots each temperature estimate on seperate plots
@@ -105,7 +133,59 @@ def plot_each_temperature(df_noaa, df_berkeley, df_wb):
 
 # next plot function
 
-def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum):
+
+
+def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=None):
+    """plot_each_absolute_temperature plots each agency's temperture estimates
+       on a single plot, colored by agency; if the agency's data is in Anomaly
+       format, then we convert to absolute temperature via by using the reference
+       temperature as the mean global average temperature 1901-2012. This function
+       returns a plot handle, and/or the data used to plot (see do_plot argument)
+
+    Each dataframe should contain only two columns
+    named Data and Tanomaly_C for NOAA and Berkeley, and Date and Tabsolute_C
+    for World Bank.
+
+    do_plot specifies whether to return the plotting (x,y) data, or to generate the plot
+    figNum, if provided, is the figure numbered in the Jupyter Notebook
+
+    Syntax
+    >>> hf = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, True, 1)
+        ...generates a plot in Jupyter Notebook as Figure Number 1
+    >>> (y_data, x_data) = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, False)
+
+    Inputs
+    - df_noaa (Pandas Dataframe): NOAA dataframe from grab_noaa
+    - df_berkeley (Pandas Dataframe): Berkeley dataframe from grab_berkeley
+    - df_wb (Pandas Dataframe): World Bank dataframe from grab_worldbank
+    - do_plot (boolean): True if to plot; False to return plot data
+    - figNum (int): Figure number to use in the output plotting
+
+    Output
+        if (do_plot is True), outputs
+            - Graph
+            - hf = figure handle (if do_plot )
+        if (do_plot is False), outputs
+            - (y_data, x_data) tuple where
+            y_data is a Python Dictionary of {agency_name, temperature_data} pairs
+            x_data is a Python Dictionary of {agency_name, x-axis dates} pairs
+
+            i.e:
+
+            y_data = {'NOAA': [0.00, -0.12, -0.13...],
+                      'WorldBank': [19.002324., 18.882094., ...], etc.}
+            x_data = {'WorldBank': [693961. 694326. 694691., ....],
+                      'NOAA: [.....etc.]', etc.}
+
+            That is, the _values_ in x_data are matplotlib ready dates;
+            and the _values_ in y_data are respective second columns in
+            the dataframes (Tabsolute_C or Tanomaly_C)
+
+    """
+
+    # check efficacy of arguments
+    [valid_plotting_dataframe(elem) for elem in [df_noaa, df_berkeley, df_wb]]
+
     yearly_noaa = df_noaa.groupby(df_noaa['Date'].map(lambda x: pd.to_datetime(x).year)).mean()
     yearly_noaa = yearly_noaa.reset_index()
     yearly_noaa['Date'] = yearly_noaa['Date'].astype(str) + '-01-01' #reset Date to proper format
@@ -135,8 +215,9 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum)
     else:
         # Now plot the temperatures from the 3 sources using
         # the same units (absolute degrees Celsius)
+        if (figNum is None):
+            figNum = 0
         hf = plt.figure(figNum)
-        #fig, ax1 = plt.subplots()
 
         color1 = 'tab:blue'
         color2 = 'tab:red'
@@ -147,16 +228,14 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum)
         plt.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2, label='WorldBank',linestyle='solid', alpha = 0.7, marker='None')
         plt.tick_params(axis='y', labelcolor=color1)
         plt.legend()
-
         plt.tight_layout()  # otherwise the right y-label is slightly clipped
         return hf
 
 def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, figNum):
-    """
-    def intersection(lst1, lst2):
-        lst3 = [value for value in lst1 if value in lst2]
-        return lst3
-    """
+
+    # argument checking for CO2 dataframe, others done automatically via next fn call
+    valid_plotting_dataframe(df_co2)
+
     # Get the data source dictionary and their respective x-axes
     (data_dict, axes_dict) = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, False, 0)
     co2_data = df_co2["CO2"]
@@ -165,37 +244,40 @@ def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, figNum):
     co2_xs = matplotlib.dates.date2num(pd.to_datetime(df_co2['Date']))
     axes_dict['Scripps'] = co2_xs #likewise for the x-axes
 
-    common_dates =  list(map(int, (list(reduce(lambda x,y: x&y, [set(xs) for xs in axes_dict.values()])))))
-    """
+    common_dates =  np.asarray(list(map(int, (list(reduce(lambda x,y: x&y, [set(xs) for xs in axes_dict.values()]))))),
+                                dtype=float)
+
+    common_dates = np.sort(common_dates)
+
+
     for agency_name, data in data_dict.items():
         mask = np.isin(axes_dict[agency_name], common_dates)
         masked_data = [data[i] for i in range(len(data)) if mask[i]]
         data_dict[agency_name] = masked_data
 
-        """
 
     # Create comparison graph
-
     fig, ax1 = plt.subplots()
+    with plt.style.context('Solarize_Light2'):
+        color1 = 'tab:blue'
+        ax1.set_xlabel('Date')
+        ax1.set_ylabel('Global Avg. Temperature (deg C)')
+        ax1.plot_date(common_dates, data_dict['WorldBank'],
+                                label='WorldBank',linestyle=':',color=color1,alpha=0.4,marker=None)
+        ax1.plot_date(common_dates, data_dict['NOAA'],
+                                label='NOAA',linestyle='-',color=color1, alpha=0.4 ,marker=None)
+        ax1.plot_date(common_dates, data_dict['Berkeley'],
+                                label='Berkeley',linestyle='-.', color=color1,alpha=0.4,marker=None)
+        ax1.tick_params(axis='y')
+        ax1.legend()
+        ax2 = ax1.twinx()  # second axes that shares the same x-axis
 
-    color1 = 'tab:blue'
-    ax1.set_xlabel('Date')
-    ax1.set_ylabel('Global Avg. Temperature (deg C)', color='#9293b4')
-    ax1.plot_date(axes_dict['WorldBank'], data_dict['WorldBank'], color=color1,
-                            label='WorldBank',linestyle='solid',alpha=0.5,marker=None)
-    ax1.plot_date(axes_dict['NOAA'], data_dict['NOAA'], color='#62A8E1',
-                            label='NOAA',linestyle='solid',alpha=0.5, marker=None)
-    ax1.plot_date(axes_dict['Berkeley'], data_dict['Berkeley'], color='#27435A',
-                            label='Berkeley',linestyle='solid',alpha=0.3, marker=None)
-    ax1.tick_params(axis='y', labelcolor=color1)
-    ax1.legend()
-    ax2 = ax1.twinx()  # second axes that shares the same x-axis
+        color2 = 'tab:red'
+        ax2.set_ylabel('CO2 (ppm)')
+        ax2.plot_date(common_dates, data_dict['Scripps'], color=color2,label='CO2', linewidth = 2.0, linestyle='solid', marker=None)
+        ax2.tick_params(axis='y')
 
-    color2 = 'tab:red'
-    ax2.set_ylabel('CO2 (ppm)', color=color2)
-    ax2.plot_date(axes_dict['Scripps'], data_dict['Scripps'], label='CO2', color=color2, linestyle='dashed', marker=None)
-    ax2.tick_params(axis='y', labelcolor=color2)
+        fig.tight_layout()  # otherwise the right y-label is slightly clipped
+        ax2.legend(loc=3)
 
-    fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    ax2.legend(loc=3)
-    plt.show()
+        plt.show()

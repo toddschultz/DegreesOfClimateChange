@@ -9,7 +9,7 @@ themselves.
 
 Syntax
 import plot_functions as pf
-pf.plot_function_name()
+pf.plot_function_name() --> outputs matplotlib figure to the session
 
 Written by Todd Schultz, Rahul Birmiwal, Abhishek Anand
 2018
@@ -135,7 +135,7 @@ def plot_each_temperature(df_noaa, df_berkeley, df_wb):
 
 
 
-def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=None):
+def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num=None):
     """plot_each_absolute_temperature plots each agency's temperture estimates
        on a single plot, colored by agency; if the agency's data is in Anomaly
        format, then we convert to absolute temperature via by using the reference
@@ -147,7 +147,7 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=
     for World Bank.
 
     do_plot specifies whether to return the plotting (x,y) data, or to generate the plot
-    figNum, if provided, is the figure numbered in the Jupyter Notebook
+    fig_num, if provided, is the figure numbered in the Jupyter Notebook
 
     Syntax
     >>> hf = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, True, 1)
@@ -159,7 +159,7 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=
     - df_berkeley (Pandas Dataframe): Berkeley dataframe from grab_berkeley
     - df_wb (Pandas Dataframe): World Bank dataframe from grab_worldbank
     - do_plot (boolean): True if to plot; False to return plot data
-    - figNum (int): Figure number to use in the output plotting
+    - fig_num (int): Figure number to use in the output plotting
 
     Output
         if (do_plot is True), outputs
@@ -181,11 +181,15 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=
             and the _values_ in y_data are respective second columns in
             the dataframes (Tabsolute_C or Tanomaly_C)
 
+         Written By Rahul Birmiwal
+
     """
 
     # check efficacy of arguments
     [valid_plotting_dataframe(elem) for elem in [df_noaa, df_berkeley, df_wb]]
 
+
+    # annualize the data
     yearly_noaa = df_noaa.groupby(df_noaa['Date'].map(lambda x: pd.to_datetime(x).year)).mean()
     yearly_noaa = yearly_noaa.reset_index()
     yearly_noaa['Date'] = yearly_noaa['Date'].astype(str) + '-01-01' #reset Date to proper format
@@ -194,62 +198,88 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, figNum=
     yearly_ber = yearly_ber.reset_index()
     yearly_ber['Date'] = yearly_ber['Date'].astype(str) + '-01-01' #reset Date to proper format
 
-    BASELINE_TEMP = np.mean( df_wb['Tabsolute_C'])
+    # baseline temperature for conversion
+    baseline_temp = np.mean(df_wb['Tabsolute_C'])
 
-    noaa_2_absolute = list(map(lambda x: x + BASELINE_TEMP, yearly_noaa['Tanomaly_C']))
-    berkeley_2_absolute = list(map(lambda x: x + BASELINE_TEMP, yearly_ber['Tanomaly_C']))
+    # convert Anomaly data to Absolute
+    noaa_2_absolute = list(map(lambda x: x + baseline_temp, yearly_noaa['Tanomaly_C']))
+    berkeley_2_absolute = list(map(lambda x: x + baseline_temp, yearly_ber['Tanomaly_C']))
 
     # Get new yearly dates
     dates_yearly_noaa = matplotlib.dates.date2num(pd.to_datetime(yearly_noaa['Date']))
     dates_yearly_ber = matplotlib.dates.date2num(pd.to_datetime(yearly_ber['Date']))
     dateswb = matplotlib.dates.date2num(pd.to_datetime(df_wb['Date']))
 
-    if (do_plot == False):
-        plot_data = {'NOAA':noaa_2_absolute, 'Berkeley':berkeley_2_absolute,
-                     'WorldBank':df_wb['Tabsolute_C']
-                    }
-        x_linspace = {'NOAA':dates_yearly_noaa, 'Berkeley':dates_yearly_ber,
-                     'WorldBank':dateswb
-                     }
+    if (not do_plot):
+        plot_data = {'NOAA':noaa_2_absolute, 'Berkeley':berkeley_2_absolute, 'WorldBank':df_wb['Tabsolute_C']}
+        x_linspace = {'NOAA':dates_yearly_noaa, 'Berkeley':dates_yearly_ber, 'WorldBank':dateswb}
         return (plot_data, x_linspace)
     else:
         # Now plot the temperatures from the 3 sources using
         # the same units (absolute degrees Celsius)
-        if (figNum is None):
-            figNum = 0
-        hf = plt.figure(figNum)
+        if (fig_num is None):
+            fig_num = 0
+        hf = plt.figure(fig_num)
 
         color1 = 'tab:blue'
         color2 = 'tab:red'
         plt.xlabel('Date')
         plt.ylabel('Absolute Global Avg. Temp (deg C)', color=color1)
-        plt.plot_date(dates_yearly_noaa, noaa_2_absolute, color=color1, label='NOAA',linestyle='solid', alpha = 0.8, marker='None')
-        plt.plot_date(dates_yearly_ber, berkeley_2_absolute, color='green', label='Berkeley',alpha = 0.5, linestyle='dashed', marker='None')
-        plt.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2, label='WorldBank',linestyle='solid', alpha = 0.7, marker='None')
+        plt.plot_date(dates_yearly_noaa, noaa_2_absolute, color=color1, label='NOAA', linestyle='solid', alpha = 0.8, marker='None')
+        plt.plot_date(dates_yearly_ber, berkeley_2_absolute, color='green', label='Berkeley', alpha=0.5, linestyle='dashed', marker='None')
+        plt.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2, label='WorldBank', linestyle='solid', alpha=0.7, marker='None')
         plt.tick_params(axis='y', labelcolor=color1)
         plt.legend()
         plt.tight_layout()  # otherwise the right y-label is slightly clipped
         return hf
 
-def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, figNum):
 
+
+
+def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, fig_num):
+    """plot_co2plot_co2_against_temperature plots the aforementioned absolute global
+       avg. temperature from our agencies, as well as CO2 data from the Scripps Institute
+       of Oceanography, on the same plot
+
+      do_plot specifies whether to return the plotting (x,y) data, or to generate the plot
+      fig_num, if provided, is the figure numbered in the Jupyter Notebook
+
+      Syntax
+      >>> plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, 4)
+
+      Arguments
+      - df_noaa (Pandas Dataframe): NOAA dataframe from grab_noaa
+      - df_berkeley (Pandas Dataframe): Berkeley dataframe from grab_berkeley
+      - df_wb (Pandas Dataframe): World Bank dataframe from grab_worldbank
+      - do_plot (boolean): True if to plot; False to return plot data
+      - fig_num (int): Figure number to use in the output plotting
+
+      Returns
+      - None
+
+      Outputs
+      - matplotlib graph of that described above
+
+      Written By Rahul Birmiwal
+    """
     # argument checking for CO2 dataframe, others done automatically via next fn call
     valid_plotting_dataframe(df_co2)
 
     # Get the data source dictionary and their respective x-axes
     (data_dict, axes_dict) = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, False, 0)
-    co2_data = df_co2["CO2"]
+    co2_data = df_co2["CO2"] #store CO2 in this dictionary
     data_dict['Scripps'] = co2_data #add co2 data to the 'data source dictionary'
 
     co2_xs = matplotlib.dates.date2num(pd.to_datetime(df_co2['Date']))
     axes_dict['Scripps'] = co2_xs #likewise for the x-axes
 
-    common_dates =  np.asarray(list(map(int, (list(reduce(lambda x,y: x&y, [set(xs) for xs in axes_dict.values()]))))),
-                                dtype=float)
+    # compute the common dates across all data sources
+    common_dates = np.asarray(list(map(int, (list(reduce(lambda x, y: x&y, [set(xs) for xs in axes_dict.values()]))))), dtype=float)
 
+    # sort them in chronological order for plotting
     common_dates = np.sort(common_dates)
 
-
+    # get the data correspondong to _common_dates_, and restore in data dictionary
     for agency_name, data in data_dict.items():
         mask = np.isin(axes_dict[agency_name], common_dates)
         masked_data = [data[i] for i in range(len(data)) if mask[i]]
@@ -262,19 +292,16 @@ def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, figNum):
         color1 = 'tab:blue'
         ax1.set_xlabel('Date')
         ax1.set_ylabel('Global Avg. Temperature (deg C)')
-        ax1.plot_date(common_dates, data_dict['WorldBank'],
-                                label='WorldBank',linestyle=':',color=color1,alpha=0.4,marker=None)
-        ax1.plot_date(common_dates, data_dict['NOAA'],
-                                label='NOAA',linestyle='-',color=color1, alpha=0.4 ,marker=None)
-        ax1.plot_date(common_dates, data_dict['Berkeley'],
-                                label='Berkeley',linestyle='-.', color=color1,alpha=0.4,marker=None)
+        ax1.plot_date(common_dates, data_dict['WorldBank'], label='WorldBank',linestyle=':', color=color1, alpha=0.4, marker=None)
+        ax1.plot_date(common_dates, data_dict['NOAA'], label='NOAA',linestyle='-', color=color1, alpha=0.4, marker=None)
+        ax1.plot_date(common_dates, data_dict['Berkeley'], label='Berkeley',linestyle='-.', color=color1, alpha=0.4, marker=None)
         ax1.tick_params(axis='y')
         ax1.legend()
         ax2 = ax1.twinx()  # second axes that shares the same x-axis
 
         color2 = 'tab:red'
         ax2.set_ylabel('CO2 (ppm)')
-        ax2.plot_date(common_dates, data_dict['Scripps'], color=color2,label='CO2', linewidth = 2.0, linestyle='solid', marker=None)
+        ax2.plot_date(common_dates, data_dict['Scripps'], color=color2, label='CO2', linewidth=2.0, linestyle='solid', marker=None)
         ax2.tick_params(axis='y')
 
         fig.tight_layout()  # otherwise the right y-label is slightly clipped

@@ -51,7 +51,6 @@ def valid_plotting_dataframe(df):
     return
 
 
-
 def plot_each_temperature(df_noaa, df_berkeley, df_wb):
     """plot_each_temperature plots each temperature estimate on seperate plots
 
@@ -131,16 +130,84 @@ def plot_each_temperature(df_noaa, df_berkeley, df_wb):
              verticalalignment='bottom', horizontalalignment='right')
     return hf
 
-# next plot function
 
+def plot_all_temperature(df_noaa, df_berkeley, df_wb):
+    """plot_all_temperature plots all temperature estimates on one plot
+
+    Create a simple line graph of the provided temperatures in the input
+    dataframes where all temperature estimate sources are plotted on a single
+    set of plot axes. The plot contains two set of y axies to allow for the
+    absolute and anomaly temperatures to be plotted together. Each dataframe
+    should contain only two columns named Data and Tanomaly_C for NOAA and
+    Berkeley, and Date and Tabsolute_C for World Bank.
+
+    Syntax
+    plot_all_temperature(df_noaa, df_berkeley, df_wb)
+
+    Inputs
+    df_noaa = NOAA dataframe from grab_noaa
+    df_berkeley = Berkeley dataframe from grab_berkeley
+    df_wb = World Bank dataframe from grab_worldbank
+
+    Output
+    graph
+    hf = figure handle (optional)
+    """
+    # Prepare data for plotting
+    # NOAA Data
+    tnoaa = pd.to_datetime(df_noaa['Date'])
+    datesnoaa = matplotlib.dates.date2num(tnoaa)
+    # Berkeley Data
+    tberkeley = pd.to_datetime(df_berkeley['Date'])
+    datesberkeley = matplotlib.dates.date2num(tberkeley)
+    # World Bank Data
+    twb = pd.to_datetime(df_wb['Date'])
+    dateswb = matplotlib.dates.date2num(twb)
+
+    # Find plotting limits
+    datemin = min([datesnoaa.min(), datesberkeley.min(), dateswb.min()])
+    datemax = max([datesnoaa.max(), datesberkeley.max(), dateswb.max()])
+    datelims = [datemin, datemax]
+    ymin = math.floor(min([df_noaa["Tanomaly_C"].min(),
+                           df_berkeley["Tanomaly_C"].min()]))
+    ymax = math.ceil(max([df_noaa["Tanomaly_C"].max(),
+                          df_berkeley["Tanomaly_C"].max()]))
+    yanomalylims = [ymin, ymax]
+    ymin = math.floor(min([df_wb["Tabsolute_C"].min()]))
+    ymax = math.ceil(max([df_wb["Tabsolute_C"].max()]))
+    yabsolutelims = [ymin, ymax]
+
+    # Create comparison graph
+    fig, ax1 = plt.subplots()
+    
+    color1 = 'tab:blue'
+    ax1.set_xlabel('Date')
+    ax1.set_ylabel('T_anomaly (deg C)', color=color1)
+    ax1.plot_date(datesnoaa, df_noaa["Tanomaly_C"], color=color1,
+                  linestyle='solid', marker='None')
+    ax1.plot_date(datesberkeley, df_berkeley["Tanomaly_C"], color='green',
+                  alpha=0.5, linestyle='dashed', marker='None')
+    ax1.tick_params(axis='y', labelcolor=color1)
+
+    ax2 = ax1.twinx()  # second axes that shares the same x-axis
+    
+    color2 = 'tab:red'
+    ax2.set_ylabel('T_absolute (deg C)', color=color2)
+    ax2.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2, 
+                  linestyle='solid', marker='None')
+    ax2.tick_params(axis='y', labelcolor=color2)
+    
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.show()
 
 
 def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num=None):
     """plot_each_absolute_temperature plots each agency's temperture estimates
        on a single plot, colored by agency; if the agency's data is in Anomaly
-       format, then we convert to absolute temperature via by using the reference
-       temperature as the mean global average temperature 1901-2012. This function
-       returns a plot handle, and/or the data used to plot (see do_plot argument)
+       format, then we convert to absolute temperature via by using the
+       reference temperature as the mean global average temperature 1901-2012.
+       This function returns a plot handle, and/or the data used to plot
+       (see do_plot argument)
 
     Each dataframe should contain only two columns
     named Data and Tanomaly_C for NOAA and Berkeley, and Date and Tabsolute_C
@@ -182,12 +249,10 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
             the dataframes (Tabsolute_C or Tanomaly_C)
 
          Written By Rahul Birmiwal
-
     """
 
     # check efficacy of arguments
     [valid_plotting_dataframe(elem) for elem in [df_noaa, df_berkeley, df_wb]]
-
 
     # annualize the data
     yearly_noaa = df_noaa.groupby(df_noaa['Date'].map(lambda x: pd.to_datetime(x).year)).mean()

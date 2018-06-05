@@ -26,6 +26,7 @@ The project has the following structure:
 │   ├── grab_co2_scripps.py
 │   ├── grab_noaa.py
 │   ├── grab_worldbank.py
+│   ├── plot_functions.py
 │   ├── tests
 │   │   ├── __init__.py
 │   │   ├── test_grab_berkeley.py
@@ -37,28 +38,38 @@ The project has the following structure:
 ├── README.md
 ├── doc
 │   ├── Components.md
-│   ├── DataSources.txt
+│   ├── DegreesOfClimateChangeFinal.pptx
+│   ├── DegreesOfClimateChangeSummary.pdf
 │   ├── DegreesOfClimateChangeSummary.pptx
 │   ├── GithubStarCount.png
-│   ├── Ideas.md
 │   ├── TechnologyReview.md
 │   ├── TechnologyReview.pptx
 │   ├── UseCases.md
 │   ├── UserPersonas.md
-│   ├── Web-scraping\ Comparison\ Example.ipynb
 │   ├── design
 │   └── designworkflow.md
 ├── examples
 │   ├── GlobalTemperatureComparison-Final.ipynb
-│   ├── __init__.py
+│   └── __init__.py
+├── requirements.txt
+├── requirements2.txt
+├── scrap
+│   ├── BIrmiwal_Slides_FinalPresentation-2.pptx
+│   ├── BIrmiwal_Slides_FinalPresentation.pptx
+│   ├── DataSources.txt
+│   ├── GlobalTemperatureComparison-Abhishek.ipynb
+│   ├── GlobalTemperatureComparison-Birmiwal.ipynb
+│   ├── GlobalTemperatureComparison-TS.ipynb
+│   ├── Ideas.md
+│   ├── Presentation\ -\ Abhishek\ Slides.pptx
+│   ├── Web-scraping\ Comparison\ Example.ipynb
 │   ├── berkeleyearth.ipynb
 │   ├── co2_data_retrieval.ipynb
 │   ├── grab_WorldBank_Module.ipynb
 │   └── noaa_co2_data.ipynb
-├── requirements.txt
 └── setup.py
 
-6 directories, 44 files
+7 directories, 48 files
 ```
 ### Module code
 

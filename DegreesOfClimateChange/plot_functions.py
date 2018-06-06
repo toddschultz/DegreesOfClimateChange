@@ -299,8 +299,6 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
         return hf
 
 
-
-
 def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, fig_num):
     """plot_co2plot_co2_against_temperature plots the aforementioned absolute
        global avg. temperature from our agencies, as well as CO2 data from the

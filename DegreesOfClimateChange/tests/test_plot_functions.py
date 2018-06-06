@@ -132,6 +132,12 @@ class TestPlotFunctions(unittest.TestCase):
             raises_error(plot_co2_against_temperature(None, None, None, pd.DataFrame()))
 
 
+            # Testing plot_each_temperature
+            raises_error(plot_co2_against_temperature(None, None, None))
+            raises_error(plot_co2_against_temperature(None, pd.DataFrame(), None))
+            raises_error(plot_co2_against_temperature(None, None, pd.DataFrame()))
+
+
         except ValueError:
             pass
         else:

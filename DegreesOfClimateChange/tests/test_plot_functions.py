@@ -188,7 +188,7 @@ class TestPlotFunctions(unittest.TestCase):
         # and we only have our three main data sources
         self.assertTrue(keys[0] == 'Berkeley')
         self.assertTrue(keys[1] == 'NOAA')
-        self.assertTrue(keys[1] == 'Scripps')
+        self.assertTrue(keys[2] == 'Scripps')
         self.assertTrue(keys[3] == 'WorldBank')
         self.assertTrue(len(keys) == 4)
 
@@ -213,7 +213,7 @@ class TestPlotFunctions(unittest.TestCase):
         # and we only have our three main data sources
         self.assertTrue(keys[0] == 'Berkeley')
         self.assertTrue(keys[1] == 'NOAA')
-        self.assertTrue(keys[1] == 'Scripps')
+        self.assertTrue(keys[2] == 'Scripps')
         self.assertTrue(keys[3] == 'WorldBank')
         self.assertTrue(len(keys) == 4)
 

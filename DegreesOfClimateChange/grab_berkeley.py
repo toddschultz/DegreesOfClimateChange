@@ -28,14 +28,15 @@ def grab_berkeley():
     """
     Returns a dataframe of (Date, Tanomaly_C) tuples with data
     from the Berkeley Earth.
-    Note: Temperatures are in Celsius and reported as anomalies 
+    Note: Temperatures are in Celsius and reported as anomalies
             relative to the Jan 1951-Dec 1980 average.
             Estimated Jan 1951-Dec 1980 absolute temperature (C): 8.64
 
     Args:
         None
     Returns:
-        pandas dataframe: Dataframe pointing to the temperature measurement on monthly basis
+        pandas dataframe: Dataframe pointing to the temperature measurement
+                          on monthly basis
     Examples:
         >>> df_Berekely = grab_berkeley()
         >>>  print(df_Berekely.head())
@@ -45,19 +46,20 @@ def grab_berkeley():
             2  1750-3-01       0.574
             3  1750-4-01       0.382
             4  1750-5-01         NaN
-    
     """
     url = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
-    df_berkeley = pd.read_csv(url, delim_whitespace=True, index_col=None, skiprows=34, header=None, lineterminator='\n')
-    df_berkeley.columns = ['Year', 'Month', 'Monthly Anomaly', 'Annual Anomaly', 'Five-year Anomaly', 'Ten-year Anomaly', 'Twenty-year Anomaly', '8', '9', '10', '11', '12']
-    df_berkeley.drop(df_berkeley.columns[[3, 4, 5, 6, 7, 8, 9, 10, 11]], axis=1, inplace=True)
+    df_berkeley = pd.read_csv(url, delim_whitespace=True, index_col=None,
+                              skiprows=34, header=None, lineterminator='\n')
+    df_berkeley.columns = ['Year', 'Month', 'Monthly Anomaly',
+                           'Annual Anomaly', 'Five-year Anomaly',
+                           'Ten-year Anomaly', 'Twenty-year Anomaly',
+                           '8', '9', '10', '11', '12']
+    df_berkeley.drop(df_berkeley.columns[[3, 4, 5, 6, 7, 8, 9, 10, 11]],
+                     axis=1, inplace=True)
     # clean up dataframe
-    # df = df.sort_values(["Year", "Month"])
-    df_berkeley["Date"] = (df_berkeley["Year"].astype("str") + "-" + df_berkeley["Month"].astype("str") + "-01")
+    df_berkeley["Date"] = (df_berkeley["Year"].astype("str") + "-" +
+                           df_berkeley["Month"].astype("str") + "-01")
     df_berkeley["Tanomaly_C"] = df_berkeley["Monthly Anomaly"]
     df_berkeley.drop(df_berkeley.columns[[0, 1, 2]], axis=1, inplace=True)
 
     return df_berkeley
-
-#df_Berekely = grab_berkeley()
-#print(df_Berekely.head())

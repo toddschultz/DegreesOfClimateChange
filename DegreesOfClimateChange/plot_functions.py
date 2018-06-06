@@ -23,15 +23,17 @@ import numpy as np
 import pandas as pd
 from functools import reduce
 
+
 def valid_plotting_dataframe(df):
     """valid_plotting_dataframe is a function to test that _df_ is a valid
        dataframe that can be used in the plot_ functions. We use this function
-       because unittesting is tricky/odd-behavior when applied to visualizations
+       because unittesting is tricky/odd-behavior when applied to
+       visualizations
 
     Inputs:
-        - df (pandas Dataframe): df is a dataframe of date, data pairs i.e
-                                 df -> R(Date, TempData) where Date is a String;
-                                                             TempData is a Float
+    - df (pandas Dataframe): df is a dataframe of date, data pairs i.e
+                             df -> R(Date, TempData) where Date is a String;
+                                                            TempData is a Float
     Output:
         - None
     Raises:

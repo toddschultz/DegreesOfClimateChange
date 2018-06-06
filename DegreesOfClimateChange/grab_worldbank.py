@@ -131,8 +131,8 @@ def grab_worldbank(start_date=1901, end_date=2012):
         # if is a valid country
         if (c_code not in err_dict):
 
-            # convert the get_instrumental() content to dictionary and access it's
-            # 'subdictionary' using the appropriate country code
+            # convert the get_instrumental() content to dictionary and access 
+            # it's 'subdictionary' using the appropriate country code
             country_data = dataset[c_code].as_dict()[c_code]
 
             # for all years that are in the valid time window

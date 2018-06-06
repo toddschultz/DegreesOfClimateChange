@@ -40,7 +40,7 @@ def valid_plotting_dataframe(df):
     """
 
     if (not isinstance(df, pd.DataFrame)):
-        raise ValueError("Arguments must be dataframe produced by a grab_ function !! ")
+        raise ValueError("Arguments must be dataframe produced by a grab_ function!")
     cols = df.columns.values
     if len(cols) != 2:
         raise ValueError("Dataframe must have 2 columns")
@@ -179,7 +179,6 @@ def plot_all_temperature(df_noaa, df_berkeley, df_wb):
 
     # Create comparison graph
     fig, ax1 = plt.subplots()
-    
     color1 = 'tab:blue'
     ax1.set_xlabel('Date')
     ax1.set_ylabel('T_anomaly (deg C)', color=color1)
@@ -190,10 +189,9 @@ def plot_all_temperature(df_noaa, df_berkeley, df_wb):
     ax1.tick_params(axis='y', labelcolor=color1)
 
     ax2 = ax1.twinx()  # second axes that shares the same x-axis
-    
     color2 = 'tab:red'
     ax2.set_ylabel('T_absolute (deg C)', color=color2)
-    ax2.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2, 
+    ax2.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2,
                   linestyle='solid', marker='None')
     ax2.tick_params(axis='y', labelcolor=color2)
     
@@ -213,13 +211,15 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
     named Data and Tanomaly_C for NOAA and Berkeley, and Date and Tabsolute_C
     for World Bank.
 
-    do_plot specifies whether to return the plotting (x,y) data, or to generate the plot
-    fig_num, if provided, is the figure numbered in the Jupyter Notebook
+    do_plot specifies whether to return the plotting (x,y) data, or to generate
+    the plot fig_num, if provided, is the figure numbered in the Jupyter
+    Notebook
 
     Syntax
-    >>> hf = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, True, 1)
+    hf = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, True, 1)
         ...generates a plot in Jupyter Notebook as Figure Number 1
-    >>> (y_data, x_data) = plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, False)
+    (y_data, x_data) = plot_each_absolute_temperature(df_noaa, df_berkeley,
+                                                      df_wb, False)
 
     Inputs
     - df_noaa (Pandas Dataframe): NOAA dataframe from grab_noaa
@@ -234,8 +234,8 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
             - hf = figure handle (if do_plot )
         if (do_plot is False), outputs
             - (y_data, x_data) tuple where
-            y_data is a Python Dictionary of {agency_name, temperature_data} pairs
-            x_data is a Python Dictionary of {agency_name, x-axis dates} pairs
+            y_data is a Python Dictionary of {agency_name, temperature_data}
+            x_data is a Python Dictionary of {agency_name, x-axis dates}
 
             i.e:
 
@@ -302,12 +302,13 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
 
 
 def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, fig_num):
-    """plot_co2plot_co2_against_temperature plots the aforementioned absolute global
-       avg. temperature from our agencies, as well as CO2 data from the Scripps Institute
-       of Oceanography, on the same plot
+    """plot_co2plot_co2_against_temperature plots the aforementioned absolute
+       global avg. temperature from our agencies, as well as CO2 data from the
+       Scripps Institute of Oceanography, on the same plot
 
-      do_plot specifies whether to return the plotting (x,y) data, or to generate the plot
-      fig_num, if provided, is the figure numbered in the Jupyter Notebook
+      do_plot specifies whether to return the plotting (x,y) data, or to
+      generate the plot fig_num, if provided, is the figure numbered in the
+      Jupyter Notebook
 
       Syntax
       >>> plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, 4)
@@ -327,7 +328,7 @@ def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, fig_num):
 
       Written By Rahul Birmiwal
     """
-    # argument checking for CO2 dataframe, others done automatically via next fn call
+    # argument checking for CO2 dataframe
     valid_plotting_dataframe(df_co2)
 
     # Get the data source dictionary and their respective x-axes
@@ -349,7 +350,6 @@ def plot_co2_against_temperature(df_co2, df_noaa, df_berkeley, df_wb, fig_num):
         mask = np.isin(axes_dict[agency_name], common_dates)
         masked_data = [data[i] for i in range(len(data)) if mask[i]]
         data_dict[agency_name] = masked_data
-
 
     # Create comparison graph
     fig, ax1 = plt.subplots()

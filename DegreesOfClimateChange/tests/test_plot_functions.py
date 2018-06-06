@@ -31,6 +31,7 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from DegreesOfClimateChange.plot_functions import plot_each_absolute_temperature
 from DegreesOfClimateChange.plot_functions import plot_co2_against_temperature
+from DegreesOfClimateChange.plot_functions import plot_each_temperature
 from DegreesOfClimateChange.grab_worldbank import grab_worldbank
 from DegreesOfClimateChange.grab_berkeley import grab_berkeley
 from DegreesOfClimateChange.grab_noaa import grab_noaa
@@ -85,13 +86,22 @@ class TestPlotFunctions(unittest.TestCase):
         df_worldbank = self.df_wb # using the cached dataframe
         df_co2 = self.df_co2
         # Define the testing unit
+
+        # plot_each_absolute_temperature function data
         (self.ydata, self.xdata) = plot_each_absolute_temperature(df_noaa,
                                     df_berkeley, df_worldbank, do_plot=False,
                                     fig_num=None)
+
+        # plot_co2_against_temperature function data
         (self.ydata_wco2, self.xdata_wco2) = plot_co2_against_temperature(
                                     df_co2, df_noaa,
                                     df_berkeley, df_worldbank, do_plot=False,
                                     fig_num=0)
+
+        # plot_each_temperature function data
+        (self.ydata_multplt, self.xdata_multplt) = plot_each_temperature(
+                                                    df_noaa, df_berkeley,
+                                                    df_worldbank, do_plot=False)
 
 
 
@@ -218,6 +228,56 @@ class TestPlotFunctions(unittest.TestCase):
         self.assertTrue(len(keys) == 4)
 
         vals = self.xdata_wco2.values()
+        # test that each agency_name points to a list of numeric values
+        # that could be used on the x-axis
+        for v in vals:
+            self.assertTrue(all(isinstance(elem, int) for elem in v) or
+                            all(isinstance(elem, float) for elem in v))
+
+
+
+
+    @ignore_warnings
+    def test_x_axis_multplots(self):
+        """test_x_axis tests that the x-axes returned by
+        plot_each_temperature is a valid set of axes"""
+
+        self.assertIsInstance(self.xdata_multplt, dict)
+        keys = list(self.xdata_multplt.keys())
+        keys.sort()
+
+        # test that the correct agency names are in the x-axis dictionary
+        # and we only have our three main data sources
+        self.assertTrue(keys[0] == 'Berkeley')
+        self.assertTrue(keys[1] == 'NOAA')
+        self.assertTrue(keys[2] == 'WorldBank')
+        self.assertTrue(len(keys) == 3)
+
+        vals = self.xdata_multplt.values()
+        # test that each agency_name points to a list of numeric values
+        # that could be used on the x-axis
+        for v in vals:
+            self.assertTrue(all(isinstance(elem, int) for elem in v) or
+                            all(isinstance(elem, float) for elem in v))
+
+
+    @ignore_warnings
+    def test_y_axis_multplots(self):
+        """test_y_axis tests that the y-axes returned by
+        plot_each_temperature is a valid set of axes"""
+
+        self.assertIsInstance(self.ydata_multplt, dict)
+        keys = list(self.ydata_multplt.keys())
+        keys.sort()
+
+        # test that the correct agency names are in the x-axis dictionary
+        # and we only have our three main data sources
+        self.assertTrue(keys[0] == 'Berkeley')
+        self.assertTrue(keys[1] == 'NOAA')
+        self.assertTrue(keys[2] == 'WorldBank')
+        self.assertTrue(len(keys) == 3)
+
+        vals = self.ydata_multplt.values()
         # test that each agency_name points to a list of numeric values
         # that could be used on the x-axis
         for v in vals:

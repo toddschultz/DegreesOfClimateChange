@@ -50,7 +50,7 @@ def valid_plotting_dataframe(df):
         raise ValueError("First column must be date column ")
     if (df[cols[1]].dtype != 'float'):
         raise ValueError("Second column must be float type ")
-    return
+    return True
 
 
 def plot_each_temperature(df_noaa, df_berkeley, df_wb):
@@ -196,7 +196,7 @@ def plot_all_temperature(df_noaa, df_berkeley, df_wb):
     ax2.plot_date(dateswb, df_wb["Tabsolute_C"], color=color2,
                   linestyle='solid', marker='None')
     ax2.tick_params(axis='y', labelcolor=color2)
-    
+
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.show()
 
@@ -254,7 +254,12 @@ def plot_each_absolute_temperature(df_noaa, df_berkeley, df_wb, do_plot, fig_num
     """
 
     # check efficacy of arguments
-    [valid_plotting_dataframe(elem) for elem in [df_noaa, df_berkeley, df_wb]]
+    if (not isinstance(df_noaa, pd.DataFrame) or
+        not isinstance(df_berkeley, pd.DataFrame) or
+        not isinstance(df_wb, pd.DataFrame) ):
+        raise ValueError("Invalid arguments datatype, expected pandas dataframes")
+         
+
 
     # annualize the data
     yearly_noaa = df_noaa.groupby(df_noaa['Date'].map(lambda x: pd.to_datetime(x).year)).mean()

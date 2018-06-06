@@ -238,6 +238,15 @@ def plot_each_temperature(df_noaa, df_berkeley, df_wb, do_plot=False):
     graph
     hf = figure handle (optional)
     """
+    # check efficacy of arguments
+    if (not isinstance(df_noaa, pd.DataFrame) or
+        not isinstance(df_berkeley, pd.DataFrame) or
+        not isinstance(df_wb, pd.DataFrame) ):
+        raise ValueError("Invalid arguments datatype, expected pandas dataframes")
+
+
+
+
     # Prepare data for plotting
     # NOAA Data
     tnoaa = pd.to_datetime(df_noaa['Date'])
